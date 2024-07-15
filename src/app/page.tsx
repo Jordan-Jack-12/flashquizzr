@@ -32,7 +32,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="feature" className="w-screen h-[80vh] bg-[rgb(189,240,255)] bg-[radial-gradient(circle, rgba(189,240,255,1) 0%, rgba(234,255,213,1) 100%)]"></section>
+        <section id="feature" className="w-screen h-[80vh] bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]"></section>
         <section id="testemonial" className="w-1/2 h-8 bg-green-400"></section>
         <section id="pricing" className="w-1/2 h-20 bg-blue-300"></section>
         <section id="cta" className="w-1/2 h-10 bg-yellow-300"></section>
