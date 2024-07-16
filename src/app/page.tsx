@@ -1,5 +1,6 @@
 import { FeatureComponent } from "@/components/FeatureComponent";
 import { FeatureComponentReverse } from "@/components/FeatureComponentReverse";
+import { TestimonialComponent } from "@/components/TestimonialComponent";
 import Link from "next/link";
 
 export default function Home() {
@@ -55,10 +56,19 @@ export default function Home() {
 
         <section id="testemonial" className="w-screen flex flex-col items-center bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]">
           <h2 className="text-3xl font-bold">What Our Users Are Saying</h2>
+          <p className="mt-8 text-base text-slate-700">Hear the feedback from students who have achieved their academic goals with us</p>
+          <div className="flex w-2/3 gap-x-12 mt-12">
+            <TestimonialComponent reviewerName="Sara L" reviewer="Student" review_text="This app has transformed my study sessions. The AI-generated quizzes are spot on, and the spaced repetition feature has really helped me retain more information. I highly recommend it!" imgAlt="Sara L review" imgSrc="/profile_img.svg" />
+            <TestimonialComponent reviewerName="Mark R" reviewer="High School Student" review_text="As a busy student, I don't have time to create study materials from scratch. This app does all the heavy lifting for me, and my grades have never been better. It's a game-changer." imgAlt="Mark R pic" imgSrc="/profile_img.svg" />
+            <TestimonialComponent reviewerName="Emily K" reviewer="Graduate Student" review_text="The seamless integration with Anki makes it so easy to stay on top of my study goals. The AI-generated questions are incredibly accurate and relevant to my courses." imgSrc="/profile_img.svg" imgAlt="Emily K pic" />
+          </div>
         </section>
 
         <section id="pricing" className="w-screen flex flex-col items-center bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]">
           <h2 className="text-3xl font-bold">Get Started with the Perfect Plan</h2>
+          <div className="flex mt-12">
+
+          </div>
         </section>
 
         <section id="cta" className="w-screen flex flex-col items-center bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]">
