@@ -1,4 +1,6 @@
-import Image from "next/image";
+import { FeatureComponent } from "@/components/FeatureComponent";
+import { FeatureComponentReverse } from "@/components/FeatureComponentReverse";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -32,12 +34,41 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="feature" className="w-screen h-[80vh] bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]"></section>
-        <section id="testemonial" className="w-1/2 h-8 bg-green-400"></section>
-        <section id="pricing" className="w-1/2 h-20 bg-blue-300"></section>
-        <section id="cta" className="w-1/2 h-10 bg-yellow-300"></section>
+
+        <section id="how-it-works" className="w-screen flex flex-col items-center bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]">
+          <h2 className="text-3xl font-bold">How it works?</h2>
+          <video height={480} width={640} controls>
+            <source src="" type="video/mp4" />
+          </video>
+        </section>
+
+        <section id="feature" className="w-screen flex flex-col items-center bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)] pt-12">
+          <h2 className="text-3xl font-bold ">Why Choose FlashQuizzr?</h2>
+
+          <FeatureComponent title="AI-Driven Question Generation" paragraph="Save time and enhance your study sessions with AI-generated quizzes and flashcards tailored to your curriculum. No more manual creation—just instant, high-quality study materials." img_src="" />
+
+          <FeatureComponentReverse title="Seamless Spaced Repetition" paragraph="Boost your memory retention with our built-in spaced repetition system. Effortlessly integrate your AI-generated content into an optimized learning schedule." img_src="" />
+
+          <FeatureComponent title="Easy Export to Popular Apps" paragraph="Export your quizzes and flashcards to your favorite spaced repetition apps with just a few clicks. Compatible with Anki, Quizlet, and more." img_src="" />
+
+        </section>
+
+        <section id="testemonial" className="w-screen flex flex-col items-center bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]">
+          <h2 className="text-3xl font-bold">What Our Users Are Saying</h2>
+        </section>
+
+        <section id="pricing" className="w-screen flex flex-col items-center bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]">
+          <h2 className="text-3xl font-bold">Get Started with the Perfect Plan</h2>
+        </section>
+
+        <section id="cta" className="w-screen flex flex-col items-center bg-[rgb(236,251,255)] bg-[radial-gradient(circle, rgba(236,251,255,1) 0%, rgba(247,255,239,1) 100%)]">
+          <h2 className="text-3xl font-bold">Start Learning Today</h2>
+          <p className="text-lg">Generate Flashcards and Quizzes with a click.</p>
+          <Link href={""} className="px-4 py-2 bg-cyan-500 rounded-full text-white">Start Free Trial</Link>
+        </section>
 
       </main>
+
       <footer>
         <div>
 
