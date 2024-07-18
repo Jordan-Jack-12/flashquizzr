@@ -20,9 +20,9 @@ export default function Home() {
           </nav>
         </div>
       </header>
-      <main className="flex min-h-screen w-screen flex-col items-center justify-start">
+      <main className="flex flex-col items-center justify-start">
 
-        <section id="hero" className="w-screen mt-10 h-[70vh] ">
+        <section id="hero" className="container mt-10 h-[70vh] ">
           <div className="h-full flex flex-col items-center justify-center">
             <h1 className="text-5xl font-bold tracking-tighter"><span className="underline decoration-cyan-500 decoration-wavy">Ace </span>Your Exams</h1>
             <p className="text-md mt-8 text-gray-500">      Effortlessly Create Flashcards and Quizzes </p>
@@ -39,7 +39,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="how-it-works" className="container flex flex-col items-center ">
+        <section id="how-it-works" className="container flex flex-col items-center justify-center mx-auto">
           <h2 className="text-4xl font-bold tracking-tighter mb-8">How it works?</h2>
           <video controls height={"720"} width="1024" className="rounded-md">
             <source src="/samplevid.mp4" type="video/mp4" />
@@ -59,7 +59,7 @@ export default function Home() {
 
         </section>
 
-        <section id="testemonial" className="container flex flex-col items-center ">
+        <section id="testemonial" className="container flex flex-col items-center mx-auto">
           <h2 className="text-4xl font-bold tracking-tighter">What Our Users Are Saying</h2>
           <p className="mt-8 text-base italic text-gray-600">Read the feedback from students who have achieved their academic goals with us</p>
           <div className="flex flex-wrap gap-x-12 mt-12">
@@ -69,18 +69,30 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="pricing" className="w-screen flex flex-col items-center ">
+        <section id="pricing" className="container flex flex-col items-center ">
           <h2 className="text-4xl font-bold mt-20 tracking-tighter">Get Started with the Perfect Plan</h2>
+          <p className="mt-8 text-base italic text-gray-600">Get started now and enjoy our special discounted rates for a limited time</p>
           <div className="flex mt-12 gap-x-12">
-            <PricingComponent plan_name="Basic" price="5" period="month" access_list={["Generate Quiz", "Generate FlashCards", "Export Quiz and Flashcard", "100K tokens"]} />
-            <PricingComponent plan_name="Pro" price="15" period="month" access_list={["All Basic Feature", "Spaced Repetition", "Managing Quiz and Flashcards"]} />
+            <PricingComponent plan_name="Basic" price="5" original_price="12" discount_percent="58" period="month" access_list={["Generate Quiz", "Generate FlashCards", "Export Quiz and Flashcard"]} />
+            <PricingComponent plan_name="Pro" price="15" original_price="24" discount_percent="37" period="month" access_list={["All Basic Feature", "Spaced Repetition", "Managing Quiz and Flashcards"]} />
           </div>
         </section>
 
-        <section id="faqs" className="w-screen flex flex-col items-center">
+        <section id="faqs" className="container flex flex-col items-center">
           <h2 className="text-4xl font-bold mt-20 tracking-tighter">FAQs</h2>
           <div className="flex flex-col items-start">
-            <h3 className="text-2xl font-semibold">What is the purpose of this app?</h3>
+            <div className="relative">
+              <input type="radio" id="faq1" className="appearance-none peer" />
+              <label htmlFor="faq1" className="flex items-center cursor-pointer font-semibold text-lg after:content-['+'] after:absolute after:right-5 after:text-2xl after:text-gray-400 hover:after:text-gray-950 peer-checked:after:transform peer-checked:after:rotate-45">
+                <h3 className="text-2xl font-semibold">What is the purpose of this app?</h3>
+              </label>
+              <div className="mt-5 h-0 transition-all ease-in-out  duration-500 overflow-hidden peer-checked:h-full">
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit adipisci veniam reiciendis laudantium
+                  voluptatem in incidunt! Quod doloribus nostrum autem!
+                </p>
+              </div>
+            </div>
             <h3 className="text-2xl font-semibold">How does the AI generate questions and flashcards?</h3>
             <h3 className="text-2xl font-semibold">Can I customize the generated quizzes and flashcards?</h3>
             <h3 className="text-2xl font-semibold">How do I export the generated content to my spaced repetition software?</h3>
@@ -89,7 +101,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="cta" className="w-screen flex flex-col items-center ">
+        <section id="cta" className="container flex flex-col items-center ">
           <h2 className="text-4xl font-bold mt-20">Start Learning Today</h2>
           <p className="text-base text-gray-700 mt-4">Sign up today to start a more efficient and successful learning journey,</p>
           <p className="text-base text-gray-700"> and leave behind the frustration of disappointing results.</p>
@@ -97,33 +109,64 @@ export default function Home() {
         </section>
 
       </main>
-
+      <hr className="container mx-auto mt-8" />
       <footer>
-        <div className="container flex flex-wrap items-center justify-between mx-auto border-b border-b-gray-400">
-          <div className="flex flex-col">
+        <div className="container grid grid-cols-1 md:grid-cols-2 items-center content-start mx-auto mt-12">
+          <div className="flex flex-col gap-8">
             <div>
-              <h2 className="text-md font-bold">FlashQuizzr</h2>
+              <h2 className="text-lg font-bold">FlashQuizzr</h2>
             </div>
-            <div className="flex flex-wrap gap-4">
-              {
-                [1, 2, 4, 5, 6].map((item) => {
-                  return (
-                    <div key={item} className="w-8 h-8 bg-black"></div>
-                  )
-                })
-
-              }
+            <div className="flex flex-wrap gap-4 text-gray-700">
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 24 24">
+                <path d="M12,2C6.477,2,2,6.477,2,12c0,5.013,3.693,9.153,8.505,9.876V14.65H8.031v-2.629h2.474v-1.749 c0-2.896,1.411-4.167,3.818-4.167c1.153,0,1.762,0.085,2.051,0.124v2.294h-1.642c-1.022,0-1.379,0.969-1.379,2.061v1.437h2.995 l-0.406,2.629h-2.588v7.247C18.235,21.236,22,17.062,22,12C22,6.477,17.523,2,12,2z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 24 24">
+                <path d="M 8 3 C 5.239 3 3 5.239 3 8 L 3 16 C 3 18.761 5.239 21 8 21 L 16 21 C 18.761 21 21 18.761 21 16 L 21 8 C 21 5.239 18.761 3 16 3 L 8 3 z M 18 5 C 18.552 5 19 5.448 19 6 C 19 6.552 18.552 7 18 7 C 17.448 7 17 6.552 17 6 C 17 5.448 17.448 5 18 5 z M 12 7 C 14.761 7 17 9.239 17 12 C 17 14.761 14.761 17 12 17 C 9.239 17 7 14.761 7 12 C 7 9.239 9.239 7 12 7 z M 12 9 A 3 3 0 0 0 9 12 A 3 3 0 0 0 12 15 A 3 3 0 0 0 15 12 A 3 3 0 0 0 12 9 z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 24 24">
+                <path d="M 6 3 C 4.3550302 3 3 4.3550302 3 6 L 3 18 C 3 19.64497 4.3550302 21 6 21 L 18 21 C 19.64497 21 21 19.64497 21 18 L 21 6 C 21 4.3550302 19.64497 3 18 3 L 6 3 z M 12 7 L 14 7 C 14 8.005 15.471 9 16 9 L 16 11 C 15.395 11 14.668 10.734156 14 10.285156 L 14 14 C 14 15.654 12.654 17 11 17 C 9.346 17 8 15.654 8 14 C 8 12.346 9.346 11 11 11 L 11 13 C 10.448 13 10 13.449 10 14 C 10 14.551 10.448 15 11 15 C 11.552 15 12 14.551 12 14 L 12 7 z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 24 24">
+                <path d="M10.053,7.988l5.631,8.024h-1.497L8.566,7.988H10.053z M21,7v10	c0,2.209-1.791,4-4,4H7c-2.209,0-4-1.791-4-4V7c0-2.209,1.791-4,4-4h10C19.209,3,21,4.791,21,7z M17.538,17l-4.186-5.99L16.774,7	h-1.311l-2.704,3.16L10.552,7H6.702l3.941,5.633L6.906,17h1.333l3.001-3.516L13.698,17H17.538z"></path>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="32" height="32" viewBox="0 0 24 24">
+                <path d="M21.582,6.186c-0.23-0.86-0.908-1.538-1.768-1.768C18.254,4,12,4,12,4S5.746,4,4.186,4.418 c-0.86,0.23-1.538,0.908-1.768,1.768C2,7.746,2,12,2,12s0,4.254,0.418,5.814c0.23,0.86,0.908,1.538,1.768,1.768 C5.746,20,12,20,12,20s6.254,0,7.814-0.418c0.861-0.23,1.538-0.908,1.768-1.768C22,16.254,22,12,22,12S22,7.746,21.582,6.186z M10,14.598V9.402c0-0.385,0.417-0.625,0.75-0.433l4.5,2.598c0.333,0.192,0.333,0.674,0,0.866l-4.5,2.598 C10.417,15.224,10,14.983,10,14.598z"></path>
+              </svg>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-x-12 items-start">
-            <div className="flex flex-col"><span className="font-semibold">Links</span></div>
-            <div className="flex flex-col"><span className="font-semibold">Resources</span></div>
-            <div className="flex flex-col"><span className="font-semibold">Contact</span></div>
+          <div className="grid grid-cols-4 gap-x-12 items-start">
+            <div className="flex flex-col">
+              <span className="text-lg font-semibold">About</span>
+              <Link href={""}><span className="text-sm text-gray-600">About Us</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Our Team</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Blog</span></Link>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-semibold">Product</span>
+              <Link href={""}><span className="text-sm text-gray-600">Features</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Pricing</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Demo</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">FAQs</span></Link>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-semibold">Support</span>
+              <Link href={""}><span className="text-sm text-gray-600">Help Center</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Contact Us</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Community</span></Link>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-lg font-semibold">Legal</span>
+              <Link href={""}><span className="text-sm text-gray-600">Privacy Policy</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Terms of Service</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Cookies</span></Link>
+              <Link href={""}><span className="text-sm text-gray-600">Security</span></Link>
+            </div>
           </div>
         </div>
-        <div className="container flex flex-wrap items-center justify-between mx-auto">
-          <span>copyright 2024 FlashQuizzr</span>
-          <span><a>privacy policy</a><a>terms and conditions</a></span>
+        <hr className="container mx-auto my-4" />
+        <div className="container flex flex-wrap items-center justify-between mx-auto mb-8">
+          <span className="text-sm">&#169; 2024 FlashQuizzr</span>
+          <span className="text-sm">All right reserved. <a className="text-sm text-cyan-500 font-semibold">Privacy Policy</a><span className="font-semibold text-cyan-500"> &#9679; </span><a className="text-sm text-cyan-500 font-semibold">Terms of Service</a></span>
         </div>
       </footer>
     </>
