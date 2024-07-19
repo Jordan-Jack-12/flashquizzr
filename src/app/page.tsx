@@ -1,3 +1,4 @@
+import { FaqComponent } from "@/components/FaqComponent";
 import { FeatureComponent } from "@/components/FeatureComponent";
 import { FeatureComponentReverse } from "@/components/FeatureComponentReverse";
 import { PricingComponent } from "@/components/PricingComponent";
@@ -8,45 +9,47 @@ export default function Home() {
   return (
     <>
       <header>
-        <div className="fixed top-0 right-0 left-0 z-50 bg-white container py-4 flex items-center justify-between font-bold mx-auto">
+        <div className="fixed top-0 right-0 left-0 z-50 bg-white container py-4 flex items-center justify-between font-bold mx-auto px-5">
           <div>FlashQuizzr</div>
           <nav>
-            <ul className="flex justify-around items-center gap-x-4">
-              <li>Feature</li>
-              <li>Pricing</li>
-              <li>Sigin</li>
-              <li><a><button className="py-2 px-6 text-white bg-cyan-500 rounded-full">Signup</button></a></li>
+            <ul className="hidden md:flex justify-around items-center gap-x-4">
+              <li><Link href={"/#feature"}>Feature</Link></li>
+              <li><Link href={"/#pricing"}>Pricing</Link></li>
+              <li><Link href={"https://app.flashquizzr.com/signin"}>Sigin</Link></li>
+              <li><Link href={"https://app.flashquizzr.com/signup"}><button className="py-2 px-6 text-white bg-cyan-500 rounded-full">Signup</button></Link></li>
             </ul>
           </nav>
         </div>
       </header>
       <main className="flex flex-col items-center justify-start">
 
-        <section id="hero" className="container mt-10 h-[70vh] ">
+        <section id="home" className="container mt-10 h-[70vh] ">
           <div className="h-full flex flex-col items-center justify-center">
-            <h1 className="text-5xl font-bold tracking-tighter"><span className="underline decoration-cyan-500 decoration-wavy">Ace </span>Your Exams</h1>
+            <h1 className="text-5xl font-bold tracking-tighter"><span className="underline decoration-cyan-500 decoration-wavy">Ace </span>Your <span className="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-cyan-500 relative inline-block">
+              <span className="relative text-white">Exams</span>
+            </span></h1>
             <p className="text-md mt-8 text-gray-500">      Effortlessly Create Flashcards and Quizzes </p>
             <p className="text-md text-gray-500 mt-0">Automate Your Study Sessions
             </p>
             <div className="mt-20 flex gap-x-8">
-              <Link href={""}>
+              <Link href={"/#demo"}>
                 <button className="py-2 px-6 border-2 border-cyan-500 text-cyan-500 font-semibold rounded-full bg-white hover:drop-shadow-lg">Watch Demo</button>
               </Link>
-              <Link href={""}>
+              <Link href={"https://app.flashquizzr.com/signup"}>
                 <button className="py-2 px-6 border-2 border-cyan-500 rounded-full text-white bg-cyan-500 font-bold hover:drop-shadow-lg">Generate Flashcards</button>
               </Link>
             </div>
           </div>
         </section>
 
-        <section id="how-it-works" className="container flex flex-col items-center justify-center mx-auto">
+        <section id="demo" className="container flex flex-col items-center justify-center mx-auto">
           <h2 className="text-4xl font-bold tracking-tighter mb-8">How it works?</h2>
           <video controls height={"720"} width="1024" className="rounded-md">
             <source src="/samplevid.mp4" type="video/mp4" />
           </video>
         </section>
 
-        <section id="feature" className="container flex flex-col items-center pt-12">
+        <section id="benefit" className="container flex flex-col items-center pt-12">
           <h2 className="text-4xl font-bold tracking-tighter">Why Choose FlashQuizzr?</h2>
 
           <FeatureComponent title="Save Your Time" paragraph="Traditional study methods can be inefficient and time-consuming. FlashQuizzr automates the creation of study materials, allowing you to focus on learning." img_src="/time.svg" />
@@ -59,7 +62,7 @@ export default function Home() {
 
         </section>
 
-        <section id="testemonial" className="container flex flex-col items-center mx-auto">
+        <section id="testimonial" className="container flex flex-col items-center mx-auto">
           <h2 className="text-4xl font-bold tracking-tighter">What Our Users Are Saying</h2>
           <p className="mt-8 text-base italic text-gray-600">Read the feedback from students who have achieved their academic goals with us</p>
           <div className="flex flex-wrap gap-x-12 mt-12">
@@ -73,31 +76,25 @@ export default function Home() {
           <h2 className="text-4xl font-bold mt-20 tracking-tighter">Get Started with the Perfect Plan</h2>
           <p className="mt-8 text-base italic text-gray-600">Get started now and enjoy our special discounted rates for a limited time</p>
           <div className="flex mt-12 gap-x-12">
-            <PricingComponent plan_name="Basic" price="5" original_price="12" discount_percent="58" period="month" access_list={["Generate Quiz", "Generate FlashCards", "Export Quiz and Flashcard"]} />
-            <PricingComponent plan_name="Pro" price="15" original_price="24" discount_percent="37" period="month" access_list={["All Basic Feature", "Spaced Repetition", "Managing Quiz and Flashcards"]} />
+            <PricingComponent plan_name="Basic" price="5" original_price="12" discount_percent="58" period="month" access_list={["Generate upto 1000 Quiz/Flashcard per Month", "Export Quiz and Flashcard", "Editing and Managing", "Email Support"]} />
+            <PricingComponent plan_name="Pro" price="15" original_price="24" discount_percent="37" period="month" access_list={["All Basic Feature", "In-built Spaced Repetition", "Advanced Stats and Insights", "Priority Customer Support"]} />
           </div>
         </section>
 
         <section id="faqs" className="container flex flex-col items-center">
           <h2 className="text-4xl font-bold mt-20 tracking-tighter">FAQs</h2>
-          <div className="flex flex-col items-start">
-            <div className="relative">
-              <input type="radio" id="faq1" className="appearance-none peer" />
-              <label htmlFor="faq1" className="flex items-center cursor-pointer font-semibold text-lg after:content-['+'] after:absolute after:right-5 after:text-2xl after:text-gray-400 hover:after:text-gray-950 peer-checked:after:transform peer-checked:after:rotate-45">
-                <h3 className="text-2xl font-semibold">What is the purpose of this app?</h3>
-              </label>
-              <div className="mt-5 h-0 transition-all ease-in-out  duration-500 overflow-hidden peer-checked:h-full">
-                <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Impedit adipisci veniam reiciendis laudantium
-                  voluptatem in incidunt! Quod doloribus nostrum autem!
-                </p>
-              </div>
-            </div>
-            <h3 className="text-2xl font-semibold">How does the AI generate questions and flashcards?</h3>
-            <h3 className="text-2xl font-semibold">Can I customize the generated quizzes and flashcards?</h3>
-            <h3 className="text-2xl font-semibold">How do I export the generated content to my spaced repetition software?</h3>
-            <h3 className="text-2xl font-semibold">Is there an inbuilt spaced repetition feature?</h3>
-            <h3 className="text-2xl font-semibold">Is there a free trial available?</h3>
+          <div className="mx-8 mt-8 flex flex-col items-start">
+            <FaqComponent ques="What is the purpose of this app?" ans="This app helps students generate AI-driven quizzes and flashcards, making studying more efficient and effective. It also supports exporting content to popular spaced repetition software." />
+            <hr />
+            <FaqComponent ques="How does the AI generate questions and flashcards?" ans="The AI analyzes the provided study material to create relevant questions and answers, ensuring comprehensive coverage of key concepts." />
+            <hr />
+            <FaqComponent ques="Can I customize the generated quizzes and flashcards?" ans="Yes, you can review and edit the generated content to fit your specific study needs and preferences." />
+            <hr />
+            <FaqComponent ques="How do I export the generated content to my spaced repetition software?" ans="The app supports exporting to various formats compatible with popular spaced repetition tools like Anki and Quizlet. Simply choose your preferred format and download." />
+            <hr />
+            <FaqComponent ques="Is there an inbuilt spaced repetition feature?" ans="Yes, the app includes an inbuilt spaced repetition feature, allowing you to study directly within the platform without needing additional software." />
+            <hr />
+            <FaqComponent ques="Is there a free trial available?" ans="Yes, we offer a free trial period so you can explore the app's features and see how it can benefit your studies before committing to a subscription." />
           </div>
         </section>
 
@@ -109,7 +106,9 @@ export default function Home() {
         </section>
 
       </main>
+
       <hr className="container mx-auto mt-8" />
+
       <footer>
         <div className="container grid grid-cols-1 md:grid-cols-2 items-center content-start mx-auto mt-12">
           <div className="flex flex-col gap-8">
@@ -144,9 +143,9 @@ export default function Home() {
             <div className="flex flex-col">
               <span className="text-lg font-semibold">Product</span>
               <Link href={""}><span className="text-sm text-gray-600">Features</span></Link>
-              <Link href={""}><span className="text-sm text-gray-600">Pricing</span></Link>
-              <Link href={""}><span className="text-sm text-gray-600">Demo</span></Link>
-              <Link href={""}><span className="text-sm text-gray-600">FAQs</span></Link>
+              <Link href={"/#pricing"}><span className="text-sm text-gray-600">Pricing</span></Link>
+              <Link href={"/#demo"}><span className="text-sm text-gray-600">Demo</span></Link>
+              <Link href={"/#faqs"}><span className="text-sm text-gray-600">FAQs</span></Link>
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-semibold">Support</span>
