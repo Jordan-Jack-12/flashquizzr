@@ -11,7 +11,7 @@ type PropsType = {
 
 export function PricingComponent({ plan_name, price, original_price, discount_percent, period, access_list }: PropsType) {
   return (
-    <div className="flex-1 w-auto p-6 flex flex-col bg-white rounded-md drop-shadow-md">
+    <div className="flex-1 w-auto p-6 flex flex-col justify-between bg-white rounded-md drop-shadow-lg border border-gray-200">
       <div className="flex flex-col gap-y-3">
         <h3 className="text-xl font-bold">
           {plan_name}
@@ -22,7 +22,7 @@ export function PricingComponent({ plan_name, price, original_price, discount_pe
           {
             access_list.map((item: string, index: number) => {
               return (
-                <li key={index} className="list-disc text-base">{item}</li>
+                <li key={index} className="list-disc text-base py-1">{item}</li>
               )
             })
           }
