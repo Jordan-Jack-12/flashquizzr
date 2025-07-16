@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="180"
+   height="180"
+   viewBox="0 0 180 180"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px" />
+  <defs
+     id="defs1">
+    <linearGradient
+       id="linearGradient15"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#f97316;stop-opacity:1;"
+         offset="0"
+         id="stop15" />
+      <stop
+         style="stop-color:#fb923c;stop-opacity:1;"
+         offset="1"
+         id="stop16" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient15"
+       id="linearGradient16"
+       x1="14.875067"
+       y1="20.872805"
+       x2="158.24498"
+       y2="151.91962"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect8"
+       style="fill:url(#linearGradient16);stroke:#af7d00;stroke-width:0"
+       d="m 76.57891,18.800956 c -3.656593,0.09877 -7.345545,1.086346 -10.748047,3.050781 L 24.276176,45.843925 c -10.888007,6.286193 -14.5928354,20.111993 -8.306642,31 l 42.17578,73.048825 c 3.965005,6.86759 10.928596,10.86705 18.263673,11.31445 -5.991175,-4.62159 -9.853516,-11.85539 -9.853513,-20.04101 l -10e-7,-94.091796 c 0,-12.961788 9.650238,-23.567254 22.183593,-25.103517 C 85.068072,19.7958 80.848498,18.685629 76.57891,18.800956 Z m 19.835937,10.943359 c -12.5724,0 -22.695312,10.120959 -22.695311,22.69336 l -3e-6,84.349605 c 10e-7,12.5724 10.122916,22.69336 22.695314,22.69336 h 47.982423 c 12.5724,0 22.69336,-10.12096 22.69336,-22.69336 l 1e-5,-84.349605 c -1e-5,-12.572402 -10.12097,-22.693362 -22.69337,-22.693361 z" />
+  </g>
+</svg>
