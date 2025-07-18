@@ -4,6 +4,41 @@ import Link from 'next/link'
 import { Calendar } from 'lucide-react'
 import { formatDateToDDMMYYYY } from '@/utils/DateTimeString'
 
+type featuredPostType = {
+    slug: string;
+    id: string;
+    createdAt: Date;
+    title: string;
+    coverImage: string | null;
+    featured: boolean;
+    tags: {
+        name: string
+    }[]
+}
+
+type postType = {
+    slug: string;
+    id: string;
+    createdAt: Date;
+    title: string;
+    description: string | null;
+    coverImage: string | null;
+    featured: boolean;
+    tags: {
+        name: string
+    }[]
+}
+
+type postWithoutTagType = {
+    slug: string;
+    id: string;
+    createdAt: Date;
+    title: string;
+    coverImage: string | null;
+    featured: boolean;
+}
+
+
 const BlogPage = async () => {
 
     const postListFeatured = await prisma.post.findMany({
@@ -87,7 +122,7 @@ const BlogPage = async () => {
         <main className='md:max-w-7xl mx-auto'>
             <h1 className='text-3xl text-center font-bold mb-6'>Blog</h1>
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-2.5 px-2.5'>
-                {postListFeatured.length > 0 && postListFeatured.map((item, index) => {
+                {postListFeatured.length > 0 && postListFeatured.map((item: featuredPostType, index: number) => {
                     return (
                         <Link href={`/blog/${item.slug}`} key={item.id} className={`w-full min-h-56 flex flex-col justify-end items-start p-4 button_gradient rounded-md ${index === 0 ? 'sm:row-span-2' : ''
                             }`}>
@@ -102,7 +137,7 @@ const BlogPage = async () => {
             </div>
             <div className='bg-orange-700/20 py-2.5 m-2.5'><p className='text-center'>Recent from Flashquizzr</p></div>
             <div className='grid grid-cols-2 gap-2 px-2.5'>
-                {recentSixPost.length > 0 && recentSixPost.map((item) => {
+                {recentSixPost.length > 0 && recentSixPost.map((item: postWithoutTagType) => {
                     return (
                         <Link href={`/blog/${item.slug}`} key={item.id} className='grid grid-cols-1 sm:grid-cols-2 gap-2 p-2.5 rounded-md bg-stone-800'>
                             <div className='w-full min-h-32 button_gradient'>
@@ -122,25 +157,22 @@ const BlogPage = async () => {
                 <div className='lg:col-span-2'>
                     <div className='bg-orange-700/20 py-2.5 m-2.5'><p className='text-center'>Recent Posts</p></div>
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 p-2.5 gap-2.5'>
-                        {recentTenPost.length > 0 && recentTenPost.map((item) => {
+                        {recentTenPost.length > 0 && recentTenPost.map((item: postType) => {
                             return (
                                 <div key={item.id} className='grid grid-cols-1 lg:grid-cols-2 p-2.5 gap-2.5 bg-stone-8700 rounded-md'>
-                            <div className='w-full min-h-48 button_gradient'>
+                                    <div className='w-full min-h-48 button_gradient'>
 
-                            </div>
-                            <div>
-                                <span className='px-2 py-1 bg-orange-500/15 rounded-lg'>{item.tags[0].name}</span>
-                                <h2 className='text-2xl'>{item.title}</h2>
-                                <div><p className='flex gap-1 items-center'><Calendar size={16} /> {formatDateToDDMMYYYY(item.createdAt)}</p></div>
-                                <p className='line-clamp-2'>{item.description}</p>
-                                <Link href={"/blog/" + item.slug}>READ MORE</Link>
-                            </div>
-                        </div>
+                                    </div>
+                                    <div>
+                                        <span className='px-2 py-1 bg-orange-500/15 rounded-lg'>{item.tags[0].name}</span>
+                                        <h2 className='text-2xl'>{item.title}</h2>
+                                        <div><p className='flex gap-1 items-center'><Calendar size={16} /> {formatDateToDDMMYYYY(item.createdAt)}</p></div>
+                                        <p className='line-clamp-2'>{item.description}</p>
+                                        <Link href={"/blog/" + item.slug}>READ MORE</Link>
+                                    </div>
+                                </div>
                             )
                         })}
-                        
-
-
                     </div>
                 </div>
                 <div>

@@ -4,6 +4,17 @@ import { Calendar } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
+type postType = {
+        slug: string;
+        id: string;
+        createdAt: Date;
+        title: string;
+        description: string | null;
+        coverImage: string | null;
+        featured: boolean;
+    }
+
+
 const TagPage = async ({ params }: { params: Promise<({ slug: string })> }) => {
     const { slug } = await params
 
@@ -36,7 +47,7 @@ const TagPage = async ({ params }: { params: Promise<({ slug: string })> }) => {
         <main className='md:max-w-5xl mx-auto'>
             <h3 className="text-[1.75rem] text-left max-w-[720px] mx-2.5 sm:text-center sm:mx-auto">Posts for {posts.name}</h3>
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 p-2.5 gap-2.5'>
-                        {posts.posts.length > 0 && posts.posts.map((item) => {
+                        {posts.posts.length > 0 && posts.posts.map((item: postType) => {
                             return (
                                 <div key={item.id} className='grid grid-cols-1 lg:grid-cols-2 p-2.5 gap-2.5 bg-stone-800 rounded-md'>
                             <div className='w-full min-h-48 button_gradient'>
