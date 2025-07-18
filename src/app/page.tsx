@@ -27,7 +27,7 @@ export default function Home() {
         <section id="home" className="container mt-2 sm:mt-1 sm:h-[70vh] sm:grid sm:grid-cols-1">
           <div className="place-self-center">
             <h1 className="text-3xl mt-5  md:text-4xl font-bold tracking-tighter sm:leading-[3.75rem] px-2.5 sm:px-0 sm:text-center">When You Actually Need to Remember Stuff</h1>
-            <p className="text-base mt-8 text-stone-600 dark:text-stone-400 px-2.5 place-self-start sm:place-self-center">Flashcards and quizzes that go beyond “just okay.”</p>
+            <p className="text-base mt-8 text-stone-600 dark:text-stone-400 px-2.5 place-self-start sm:text-xl sm:place-self-center">Flashcards and quizzes that go beyond “just okay.”</p>
             <div className="mt-12 mx-2.5 md:mx-auto grid grid-cols-1 md:flex gap-3 items-stretch md:items-center sm:place-self-center">
               <Link href={`/`}>
                 <button className={`w-full py-2 px-6 rounded-md button_gradient text-orange-950 font-bold hover:drop-shadow-lg`}>Start Study</button>
@@ -53,8 +53,8 @@ export default function Home() {
               Image
             </div>
             <div>
-              <h3 className="mt-4 text-xl font-bold px-2.5">AI-Generated Flashcards</h3>
-              <p className="px-2.5">Paste your topic, and boom—flashcards made for you in seconds. Let the robots do the heavy lifting (for once).</p>
+              <h3 className="mt-4 text-xl font-bold px-2.5 sm:mt-0">AI-Generated Flashcards</h3>
+              <p className="px-2.5 mt-2.5">Paste your topic, and boom—flashcards made for you in seconds. Let the robots do the heavy lifting (for once).</p>
             </div>
           </div>
           <div className="mt-5 sm:grid sm:grid-cols-2">
@@ -62,8 +62,8 @@ export default function Home() {
               Image
             </div>
             <div>
-              <h3 className="mt-4 text-xl font-bold px-2.5">Edit With Ease</h3>
-              <p className="px-2.5">Tweak. Fine-tune. Add that one weird mnemonic only you understand. You&apos;re the boss.</p>
+              <h3 className="mt-4 text-xl font-bold px-2.5 sm:mt-0">Edit With Ease</h3>
+              <p className="px-2.5 mt-2.5">Tweak. Fine-tune. Add that one weird mnemonic only you understand. You&apos;re the boss.</p>
             </div>
           </div>
           <div className="mt-5 sm:grid sm:grid-cols-2">
@@ -71,8 +71,8 @@ export default function Home() {
               Image
             </div>
             <div>
-              <h3 className="mt-4 text-xl font-bold px-2.5">Self-Quiz & Review</h3>
-              <p className="px-2.5">Multiple-choice? Classic flashcard mode? Flashquizzr lets you quiz the way your brain likes best.</p>
+              <h3 className="mt-4 text-xl font-bold px-2.5 sm:mt-0">Self-Quiz & Review</h3>
+              <p className="px-2.5 mt-2.5">Multiple-choice? Classic flashcard mode? Flashquizzr lets you quiz the way your brain likes best.</p>
             </div>
           </div>
           <div className="mt-5 sm:grid sm:grid-cols-2">
@@ -80,8 +80,8 @@ export default function Home() {
               Image
             </div>
             <div>
-              <h3 className="mt-4 text-xl font-bold px-2.5">Study Stats That Actually Matter</h3>
-              <p className="px-2.5">Know what you&apos;ve reviewed, what&apos;s left, and whether you&apos;re crushing it—or need a snack break.</p>
+              <h3 className="mt-4 text-xl font-bold px-2.5 sm:mt-0">Study Stats That Actually Matter</h3>
+              <p className="px-2.5 mt-2.5">Know what you&apos;ve reviewed, what&apos;s left, and whether you&apos;re crushing it—or need a snack break.</p>
             </div>
           </div>
           <div className="mt-5 sm:grid sm:grid-cols-2">
@@ -89,8 +89,8 @@ export default function Home() {
               Image
             </div>
             <div>
-              <h3 className="mt-4 text-xl font-bold px-2.5">Gentle Nudges, Not Nagging</h3>
-              <p className="px-2.5">Set smart reminders so your brain doesn&apos;t ghost your flashcards.</p>
+              <h3 className="mt-4 text-xl font-bold px-2.5 sm:mt-0">Gentle Nudges, Not Nagging</h3>
+              <p className="px-2.5 mt-2.5">Set smart reminders so your brain doesn&apos;t ghost your flashcards.</p>
             </div>
           </div>
           <div className="mt-5 sm:grid sm:grid-cols-2">
@@ -98,8 +98,8 @@ export default function Home() {
               Image
             </div>
             <div>
-              <h3 className="mt-4 text-xl font-bold px-2.5">Export Your Decks Anywhere</h3>
-              <p className="px-2.5">Want to take your decks to another app? Do it. We won&apos;t be mad. (But we&apos;ll miss you.)</p>
+              <h3 className="mt-4 text-xl font-bold px-2.5 sm:mt-0">Export Your Decks Anywhere</h3>
+              <p className="px-2.5 mt-2.5">Want to take your decks to another app? Do it. We won&apos;t be mad. (But we&apos;ll miss you.)</p>
             </div>
           </div>
         </section>

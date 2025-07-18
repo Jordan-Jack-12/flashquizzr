@@ -1,0 +1,176 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String           @id @default(cuid())
+  email          String           @unique
+  passwordHash   String
+  createdAt      DateTime         @default(now())
+  lastLogin      DateTime?
+  subscription   Subscription[]
+  decks          Deck[]
+  studySessions  StudySession[]
+  flashcardStats FlashcardStats[]
+}
+
+model Subscription {
+  id        String    @id @default(cuid())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  plan      String // e.g., 'free', 'pro', etc.
+  startDate DateTime
+  endDate   DateTime?
+  status    String // active, cancelled, expired
+}
+
+model Deck {
+  id            String         @id @default(cuid())
+  user          User           @relation(fields: [userId], references: [id])
+  userId        String
+  title         String
+  description   String?
+  isPublic      Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  flashcards    Flashcard[]
+  studySessions StudySession[] // ✅ Add this line
+}
+
+enum FlashcardType {
+  BASIC
+  MCQ
+  CLOZE
+  LIST
+  IMAGE_OCCLUSION
+}
+
+model Flashcard {
+  id        String           @id @default(cuid())
+  deck      Deck             @relation(fields: [deckId], references: [id])
+  deckId    String
+  type FlashcardType
+  dueDate DateTime?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  basic FlashcardBasic?
+  mcq FlashcardMCQ?
+  cloze FlashcardCloze?
+  list FlashcardList?
+  imageOcclusion FlashcardImageOcclusion?
+
+  logs      StudyCardLog[]
+  stats     FlashcardStats[]
+}
+
+model FlashcardBasic {
+  flashcardId String @id
+  front       String
+  back        String
+
+  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
+}
+
+model FlashcardMCQ {
+  flashcardId   String @id
+  question      String
+  correctOption String
+  options       Json
+
+  flashcard     Flashcard @relation(fields: [flashcardId], references: [id])
+}
+
+model FlashcardCloze {
+  flashcardId String @id
+  text        String  // e.g., "The capital of France is [[Paris]]"
+
+  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
+}
+
+model FlashcardList {
+  flashcardId String @id
+  prompt      String
+  items       Json     // Example: ["First", "Second", "Third"]
+
+  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
+}
+
+model FlashcardImageOcclusion {
+  flashcardId String @id
+  imageUrl    String
+  masks       Json   // Example: [{ x, y, width, height, label }]
+
+  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
+}
+
+model StudySession {
+  id        String         @id @default(cuid())
+  user      User           @relation(fields: [userId], references: [id])
+  userId    String
+  deck      Deck           @relation(fields: [deckId], references: [id])
+  deckId    String
+  mode      String // 'study' or 'quiz'
+  startedAt DateTime       @default(now())
+  endedAt   DateTime?
+  score     Float?
+  logs      StudyCardLog[]
+}
+
+model StudyCardLog {
+  id             String       @id @default(cuid())
+  studySession   StudySession @relation(fields: [studySessionId], references: [id])
+  studySessionId String
+  flashcard      Flashcard    @relation(fields: [flashcardId], references: [id])
+  flashcardId    String
+  responseType   String // correct, incorrect, skipped
+  userAnswer     String?
+  timestamp      DateTime     @default(now())
+}
+
+model FlashcardStats {
+  id           String    @id @default(cuid())
+  user         User      @relation(fields: [userId], references: [id])
+  userId       String
+  flashcard    Flashcard @relation(fields: [flashcardId], references: [id])
+  flashcardId  String
+  timesSeen    Int       @default(0)
+  timesCorrect Int       @default(0)
+  lastSeenAt   DateTime?
+}
+
+model Post {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique // for clean URLs
+  content     String // Markdown or HTML
+  description String?
+  coverImage  String?
+  readTime    Int?
+  published   Boolean  @default(false)
+  featured    Boolean  @default(false)
+  authorId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tags Tag[]
+}
+
+model Tag {
+  id    String        @id @default(uuid())
+  name  String        @unique
+  slug  String        @unique
+  posts Post[]
+}
+
