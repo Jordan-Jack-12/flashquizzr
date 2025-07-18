@@ -179,7 +179,11 @@ const BlogPage = async () => {
                     <div className='bg-orange-700/20 py-2.5 m-2.5'><p className='text-center'>Tags</p></div>
                     <div className='flex flex-wrap gap-3 mx-2.5'>
                         {!tags && <p>No Tags Found</p>}
-                        {tags.length > 0 && tags.map((item) => {
+                        {tags.length > 0 && tags.map((item: {
+                            name: string;
+                            id: string;
+                            slug: string;
+                        }) => {
                             return (
                                 <Link key={item.id} href={`/blog/tag/${item.slug}`} className='px-2 py-1 bg-orange-500/15 rounded-lg'>{item.name}</Link>
                             )
