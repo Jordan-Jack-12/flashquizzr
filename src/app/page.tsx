@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      <header className="w-screen">
-        <div className="fixed top-0 right-0 left-0 z-50 bg-black container py-4 flex items-center justify-between font-bold mx-auto px-5">
+      <header className="w-screen container mx-auto">
+        <div className="fixed top-0 right-0 left-0 z-50 bg-black/80 container py-4 flex items-center justify-between font-bold mx-auto px-5 backdrop-blur-md">
           <Link href={'/'} className="flex gap-2">
             <Image src={"/flashquizzrlogo.svg"} height={32} width={32} alt="flashquizzrlogo" />
             <h1 className="text-2xl font-bold">FlashQuizzr</h1>
@@ -24,17 +24,18 @@ export default function Home() {
       </header>
       <main className="flex flex-col items-center justify-start">
         <div className="h-16"></div>
-        <section id="home" className="container mt-2 sm:mt-1 sm:h-[70vh]">
-          <h1 className="text-3xl mt-5  md:text-4xl font-bold tracking-tighter sm:leading-[3.75rem] px-4 sm:px-0 sm:text-center">When You Actually Need to Remember Stuff</h1>
-          <p className="text-base mt-8 text-stone-600 dark:text-stone-400 px-4 place-self-start sm:place-self-center">Flashcards and quizzes that go beyond “just okay.”</p>
-          <div className="mt-12 mx-2.5 md:mx-auto grid grid-cols-1 md:flex gap-3 items-stretch md:items-center sm:place-self-center">
-            <Link href={`/`}>
-              <button className={`w-full py-2 px-6 rounded-md button_gradient text-orange-950 font-bold hover:drop-shadow-lg`}>Start Study</button>
-            </Link>
-            <Link href={"/#demo"}>
-              <button className="w-full py-2 px-6 border-2 border-orange-500 text-orange-500 font-semibold rounded-md bg-white dark:border-orange-400 dark:text-orange-400 dark:bg-stone-800 hover:drop-shadow-lg">Watch Demo</button>
-            </Link>
-
+        <section id="home" className="container mt-2 sm:mt-1 sm:h-[70vh] sm:grid sm:grid-cols-1">
+          <div className="place-self-center">
+            <h1 className="text-3xl mt-5  md:text-4xl font-bold tracking-tighter sm:leading-[3.75rem] px-2.5 sm:px-0 sm:text-center">When You Actually Need to Remember Stuff</h1>
+            <p className="text-base mt-8 text-stone-600 dark:text-stone-400 px-2.5 place-self-start sm:place-self-center">Flashcards and quizzes that go beyond “just okay.”</p>
+            <div className="mt-12 mx-2.5 md:mx-auto grid grid-cols-1 md:flex gap-3 items-stretch md:items-center sm:place-self-center">
+              <Link href={`/`}>
+                <button className={`w-full py-2 px-6 rounded-md button_gradient text-orange-950 font-bold hover:drop-shadow-lg`}>Start Study</button>
+              </Link>
+              <Link href={"/#demo"}>
+                <button className="w-full py-2 px-6 bg-orange-900/30 text-orange-400 font-semibold rounded-md dark:border-orange-300 dark:text-orange-400 hover:drop-shadow-lg">Watch Demo</button>
+              </Link>
+            </div>
           </div>
         </section>
         <section className="w-screen container mt-5">
@@ -251,7 +252,7 @@ export default function Home() {
           </details>
         </section>
       </main>
-      <footer className="w-screen">
+      <footer className="w-screen container mx-auto">
         <div className="container border-t-1 border-stone-900 grid grid-cols-1 lg:grid-cols-2 items-center content-start mx-auto mt-12 px-5">
           <div className="flex flex-col gap-8">
             <div className="flex gap-2">
