@@ -1,0 +1,129 @@
+.legal_content {
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #ffffff;
+    padding: 2rem;
+    max-width: 800px;
+    margin: auto;
+}
+
+.legal_content h1,
+.legal_content h2,
+.legal_content h3,
+.legal_content h4,
+.legal_content h5,
+.legal_content h6 {
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+    color: #fbfbfb;
+}
+
+.legal_content h1 {
+    font-size: 2rem;
+}
+
+.legal_content h2 {
+    font-size: 1.75rem;
+}
+
+.legal_content h3 {
+    font-size: 1.5rem;
+}
+
+.legal_content h4 {
+    font-size: 1.25rem;
+}
+
+.legal_content h5 {
+    font-size: 1.125rem;
+}
+
+.legal_content h6 {
+    font-size: 1rem;
+}
+
+.legal_content p {
+    margin: 1rem 0;
+}
+
+.legal_content a {
+    color: #eba225;
+    text-decoration: underline;
+    word-break: break-word;
+}
+
+.legal_content ul,
+.legal_content ol {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+}
+
+.legal_content li {
+    margin: 0.5rem 0;
+}
+
+.legal_content strong {
+    font-weight: bold;
+}
+
+.legal_content em {
+    font-style: italic;
+}
+
+.legal_content blockquote {
+    border-left: 4px solid #323232;
+    padding-left: 1rem;
+    color: #d1d1d1;
+    margin: 1rem 0;
+    font-style: italic;
+}
+
+.legal_content code {
+    background-color: #2a2a2a;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.95rem;
+}
+
+.legal_content pre {
+    background: #2b2b2b;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow: auto;
+    font-family: monospace;
+    font-size: 0.95rem;
+}
+
+.legal_content hr {
+    border: none;
+    border-top: 1px solid #323232;
+    margin: 2rem 0;
+}
+
+.legal_content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+.legal_content th,
+.legal_content td {
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.legal_content th {
+    background-color: #f9f9f9;
+    font-weight: 600;
+}
+
+.legal_content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+}
