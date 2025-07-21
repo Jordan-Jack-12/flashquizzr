@@ -1,7 +1,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { cookies } from 'next/headers'
+import { getSessionUserID } from '@/actions/auth/session/getUserBySessionId';
 
-function TopNavBar() {
+async function TopNavBar() {
+    const sessionId = ((await cookies()).get("session_id")?.value || "")
+    const user = await getSessionUserID(sessionId);
+
     return (
         <header className="w-screen container mx-auto">
             <div className="fixed top-0 right-0 left-0 z-50 bg-black/80 container py-4 flex items-center justify-between font-bold mx-auto px-5 backdrop-blur-md">
@@ -14,9 +19,12 @@ function TopNavBar() {
 
                         <li><Link href={"/#feature"}>Feature</Link></li>
                         <li><Link href={"/#pricing"}>Pricing</Link></li>
-                        <li><Link href={"/login"}>Login</Link></li>
+                        {!user && <>
+                            <li><Link href={"/login"}>Login</Link></li>
+                            <li><Link href={"/signup"}><button className={`py-2 px-6 text-orange-950 rounded-md button_gradient`}>Signup</button></Link></li>
+                        </>}
+                        {user && <li><Link href={"/dashboard"}><button className={`py-2 px-6 text-orange-950 rounded-md button_gradient`}>Dashboard</button></Link></li>}
 
-                        <li><Link href={"/signup"}><button className={`py-2 px-6 text-white rounded-md button_gradient`}>Signup</button></Link></li>
                     </ul>
                 </nav>
             </div>

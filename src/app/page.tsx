@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <TopNavBar />
-      <main className="flex flex-col items-center justify-start scroll-p-16">
+      <main className="flex flex-col items-center scroll-smooth scroll-pt-18">
         <section id="home" className="container mt-2 sm:mt-1 sm:h-[70vh] sm:grid sm:grid-cols-1">
           <div className="place-self-center">
             <h1 className="text-3xl mt-5  md:text-4xl font-bold tracking-tighter sm:leading-[3.75rem] px-2.5 sm:px-0 sm:text-center">When You Actually Need to Remember Stuff</h1>
@@ -22,7 +22,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="w-screen container mt-5">
+        <section id="demo" className="max-w-5xl container mt-5">
           <h2 className="text-2xl font-semibold px-2.5 sm:text-center sm:mb-5">How FlashQuizzr Works?</h2>
           <div className="h-48 sm:h-96 sm:mx-5 button_gradient flex justify-center items-center">
             <div className="h-9 w-9 bg-gray-800 rounded-full flex justify-center items-center">
@@ -30,7 +30,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="w-screen container mt-5" id="feature">
+        <section className="max-w-5xl container mt-5" id="feature">
           <h2 className="text-2xl font-semibold px-2.5 sm:text-center">Why Flashquizzr?</h2>
           <div className="mt-5 sm:grid sm:grid-cols-2">
             <div className="h-48 w-full button_gradient">
@@ -87,7 +87,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="w-screen container mt-5 sm:hidden">
+        <section className="max-w-5xl container mt-5 sm:hidden">
           <h2 className="text-2xl font-semibold px-2.5">Who&apos;s Flashquizzr For?</h2>
           <ul className="px-2.5 list-disc list-inside">
             <li>Students prepping for exams without a meltdown</li>
@@ -95,7 +95,7 @@ export default function Home() {
             <li>Anyone who wants to retain more, scroll less, and stress way less</li>
           </ul>
         </section>
-        <section id="pricing" className="w-screen container mt-5">
+        <section id="pricing" className="max-w-5xl container mt-5">
           <h2 className="text-2xl font-semibold px-2.5 sm:text-center">Get Started with the Perfect Plan</h2>
           <div className="sm:grid sm:grid-cols-2 sm:m-2.5 md:grid-cols-3 gap-2.5">
             <div className="p-6 flex flex-col justify-between bg-white dark:bg-stone-800 rounded-md m-2.5 sm:m-0">
@@ -119,7 +119,7 @@ export default function Home() {
 
                 </ul>
               </div>
-              <Link href={"/"} className={`mt-12 py-2 px-4 button_gradient text-white text-center font-semibold rounded-md`}>Start for Free </Link>
+              <Link href={"/signup"} className={`mt-12 py-2 px-4 button_gradient text-orange-950 text-center font-semibold rounded-md`}>Start for Free </Link>
             </div>
             {/* Super */}
             <div className="p-6 flex flex-col justify-between bg-white dark:bg-stone-800 rounded-md m-2.5 sm:m-0">
@@ -140,7 +140,7 @@ export default function Home() {
                   <li className="list-disc text-base py-1">Reminder Notifications</li>
                 </ul>
               </div>
-              <Link href={"/"} className={`mt-12 py-2 px-4 button_gradient text-white text-center font-semibold rounded-md`}>Start Free Trial</Link>
+              <Link href={"/signup"} className={`mt-12 py-2 px-4 button_gradient text-orange-950 text-center font-semibold rounded-md`}>Start Free Trial</Link>
             </div>
             {/* Premium */}
             <div className="p-6 flex flex-col justify-between bg-white dark:bg-stone-800 rounded-md m-2.5 sm:m-0">
@@ -161,12 +161,12 @@ export default function Home() {
                   <li className="list-disc text-base py-1">Email Support</li>
                 </ul>
               </div>
-              <Link href={"/"} className={`mt-12 py-2 px-4 button_gradient text-white text-center font-semibold rounded-md`}>Start Free Trial</Link>
+              <Link href={"/signup"} className={`mt-12 py-2 px-4 button_gradient text-orange-950 text-center font-semibold rounded-md`}>Start Free Trial</Link>
             </div>
           </div>
         </section>
         {/* FAQ */}
-        <section id="faq" className="w-screen container mt-5">
+        <section id="faq" className="max-w-5xl container mt-5">
           <h2 className="text-2xl font-semibold px-2.5 sm:text-center">Frequently Asked Questions</h2>
           {/* q1 */}
           <details className="container duration-300 select-none">

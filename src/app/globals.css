@@ -28,4 +28,6 @@
 
 body {
   font-family: var(--nunito);
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
 }
