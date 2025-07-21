@@ -4,7 +4,7 @@ import Image from 'next/image'
 function Footer() {
     return (
         <footer className="w-screen container mx-auto">
-            <div className="container border-t-1 border-stone-900 grid grid-cols-1 lg:grid-cols-2 items-center content-start mx-auto mt-12 px-5">
+            <div className="container border-t-1 border-stone-800 grid grid-cols-1 lg:grid-cols-2 items-center content-start mx-auto mt-12 px-5">
                 <div className="flex flex-col gap-8">
                     <div className="flex gap-2">
                         <Image src={"/flashquizzrlogo.svg"} height={18} width={18} alt="flashquizzrlogo" />

@@ -14,15 +14,21 @@ datasource db {
 }
 
 model User {
-  id             String           @id @default(cuid())
-  email          String           @unique
-  passwordHash   String
-  createdAt      DateTime         @default(now())
-  lastLogin      DateTime?
-  subscription   Subscription[]
-  decks          Deck[]
-  studySessions  StudySession[]
-  flashcardStats FlashcardStats[]
+  id                 String           @id @default(cuid())
+  email              String           @unique
+  passwordHash       String
+  salt               String
+  firstName          String
+  LastName           String
+  createdAt          DateTime         @default(now())
+  lastLogin          DateTime?
+  verified           Boolean          @default(false)
+  verifyToken        String?
+  verifyTokenExpires DateTime?
+  subscription       Subscription[]
+  decks              Deck[]
+  studySessions      StudySession[]
+  flashcardStats     FlashcardStats[]
 }
 
 model Subscription {
@@ -57,22 +63,22 @@ enum FlashcardType {
 }
 
 model Flashcard {
-  id        String           @id @default(cuid())
-  deck      Deck             @relation(fields: [deckId], references: [id])
+  id        String        @id @default(cuid())
+  deck      Deck          @relation(fields: [deckId], references: [id])
   deckId    String
-  type FlashcardType
-  dueDate DateTime?
-  createdAt DateTime         @default(now())
-  updatedAt DateTime         @updatedAt
+  type      FlashcardType
+  dueDate   DateTime?
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 
-  basic FlashcardBasic?
-  mcq FlashcardMCQ?
-  cloze FlashcardCloze?
-  list FlashcardList?
+  basic          FlashcardBasic?
+  mcq            FlashcardMCQ?
+  cloze          FlashcardCloze?
+  list           FlashcardList?
   imageOcclusion FlashcardImageOcclusion?
 
-  logs      StudyCardLog[]
-  stats     FlashcardStats[]
+  logs  StudyCardLog[]
+  stats FlashcardStats[]
 }
 
 model FlashcardBasic {
@@ -80,7 +86,7 @@ model FlashcardBasic {
   front       String
   back        String
 
-  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
+  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
 }
 
 model FlashcardMCQ {
@@ -89,30 +95,30 @@ model FlashcardMCQ {
   correctOption String
   options       Json
 
-  flashcard     Flashcard @relation(fields: [flashcardId], references: [id])
+  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
 }
 
 model FlashcardCloze {
   flashcardId String @id
-  text        String  // e.g., "The capital of France is [[Paris]]"
+  text        String // e.g., "The capital of France is [[Paris]]"
 
-  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
+  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
 }
 
 model FlashcardList {
   flashcardId String @id
   prompt      String
-  items       Json     // Example: ["First", "Second", "Third"]
+  items       Json // Example: ["First", "Second", "Third"]
 
-  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
+  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
 }
 
 model FlashcardImageOcclusion {
   flashcardId String @id
   imageUrl    String
-  masks       Json   // Example: [{ x, y, width, height, label }]
+  masks       Json // Example: [{ x, y, width, height, label }]
 
-  flashcard   Flashcard @relation(fields: [flashcardId], references: [id])
+  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
 }
 
 model StudySession {
@@ -168,9 +174,8 @@ model Post {
 }
 
 model Tag {
-  id    String        @id @default(uuid())
-  name  String        @unique
-  slug  String        @unique
+  id    String @id @default(uuid())
+  name  String @unique
+  slug  String @unique
   posts Post[]
 }
-

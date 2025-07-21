@@ -9,7 +9,7 @@ async function TopNavBar() {
 
     return (
         <header className="w-screen container mx-auto">
-            <div className="fixed top-0 right-0 left-0 z-50 bg-black/80 container py-4 flex items-center justify-between font-bold mx-auto px-5 backdrop-blur-md">
+            <div className="fixed top-0 right-0 left-0 z-50 bg-stone-900/80 container py-4 flex items-center justify-between font-bold mx-auto px-5 backdrop-blur-md">
                 <Link href={'/'} className="flex gap-2">
                     <Image src={"/flashquizzrlogo.svg"} height={32} width={32} alt="flashquizzrlogo" />
                     <h1 className="text-2xl font-bold">FlashQuizzr</h1>

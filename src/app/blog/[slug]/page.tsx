@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma"
 import styles from "../blog.module.css"
 import { formatDateToDDMMYYYY } from "@/utils/DateTimeString"
+import { notFound } from "next/navigation"
 // import Image from "next/image"
 
 export async function generateStaticParams() {
@@ -52,11 +53,7 @@ const PostPage = async ({
     })
 
     if (!post) {
-        return (
-            <main>
-                <h1>No Post Found</h1>
-            </main>
-        )
+        notFound();
     }
 
     return (

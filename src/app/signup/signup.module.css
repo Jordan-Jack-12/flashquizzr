@@ -1,0 +1,105 @@
+.main {
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+.logo {
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+.heading {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.form {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem 0.625rem;
+    display: grid;
+    gap: 1rem;
+    max-width: 28rem;
+}
+
+.form_element {
+    display: grid;
+}
+
+.form_element label {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.form_element input {
+    padding: 0.5rem 0.75rem;
+    border-width: 2px;
+    border-color: rgb(68,64,60);
+    border-radius: 0.375rem;
+    background-color: rgb(41,37,36);
+    outline: none;
+
+    &:focus {
+        border-color: #ff7e5f;
+    }
+
+    &::-ms-reveal {
+        filter: invert(100%);
+    }
+
+    &:not(:placeholder-shown):invalid {
+        border-color: red;
+    }
+
+    &:not(:placeholder-shown):valid {
+        border-color: green;
+    }
+
+    &:focus:invalid {
+        border-color: #ff7e5f;
+    }
+}
+
+.checkbox {
+    display: flex;
+    gap: 1ch;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+
+.checkbox input {
+    accent-color: #ff7e5f;
+}
+
+.checkbox a {
+    color: #ff7e5f;
+    text-underline-offset: 0.188rem;
+    text-decoration: underline;
+}
+
+.button {
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(135deg, #feb47b, #ff7e5f);
+    border-radius: 0.375rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: rgb(67,20,7);
+
+    &:hover {
+        background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    }
+}
+
+.form p {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.form p > a {
+    color: #ff7e5f;
+    text-underline-offset: 0.188rem;
+    text-decoration: underline;
+}
