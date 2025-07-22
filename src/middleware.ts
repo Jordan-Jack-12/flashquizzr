@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname
     const sessionId = request.cookies.get("session_id")?.value || "";
     
-    if (authRoutes.includes(pathname)) return NextResponse.redirect(new URL("/dashboard", request.url));
+    if (authRoutes.includes(pathname) && !sessionId) return NextResponse.redirect(new URL("/dashboard", request.url));
 
     if (privateRoutes.includes(pathname)) {
         const user = await getSessionUserID(sessionId);
