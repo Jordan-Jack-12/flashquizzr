@@ -12,8 +12,6 @@ const CardPage = async (props: PageParams) => {
 
     const { deck_id, card_id } = await props.params;
 
-    // const fakeLoggedInEmail = 'alice@example.com';
-
     const card = await prisma.flashcard.findUnique({
         where: { id: card_id },
     });
@@ -28,7 +26,7 @@ const CardPage = async (props: PageParams) => {
 
     return (
         <div className='min-h-screen flex flex-col gap-2'>
-            <StudyPane deck_id={deck_id} card_id={card_id} question={card!.question} answer={card!.answer} />
+            <StudyPane deck_id={deck_id} card_id={card_id} question={"fsadfsad"} answer={"fsajdkf"} />
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import { getSessionUserID } from '@/actions/auth/session/getUserBySessionId';
 import HomePageDecksCard from '@/components/HomePageDecksCard'
 import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
@@ -5,20 +6,25 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 
 const DashboardPage = async () => {
-    const userSession = (await cookies()).get('session_id');
-    if (!userSession) {
-        redirect("/terms");
+    const sessionId = (await cookies()).get("session_id")?.value || "";
+    if (!sessionId || sessionId === "") {
+        redirect("/login");
+    }
+    const userId = await getSessionUserID(sessionId);
+    
+    if (!userId) {
+        redirect("/login");
     }
 
     const user = await prisma.user.findUnique({
-        where: { email: 'sureshkumarekka53@gmail.com' },
+        where: { id:  userId},
         include: {
             decks: true
         },
     });
 
     if (!user) {
-        return <div>User not found.</div>;
+        redirect("/login");
     }
 
 

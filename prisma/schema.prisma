@@ -32,13 +32,14 @@ model User {
 }
 
 model Subscription {
-  id        String    @id @default(cuid())
-  user      User      @relation(fields: [userId], references: [id])
-  userId    String
-  plan      String // e.g., 'free', 'pro', etc.
-  startDate DateTime
-  endDate   DateTime?
-  status    String // active, cancelled, expired
+  id                   String    @id @default(cuid())
+  user                 User      @relation(fields: [userId], references: [id])
+  userId               String
+  paddleSubscriptionId String
+  plan                 String // e.g., 'free', 'pro', etc.
+  startDate            DateTime
+  endDate              DateTime?
+  status               String // active, cancelled, expired
 }
 
 model Deck {
