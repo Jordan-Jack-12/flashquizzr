@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
-
 import "./globals.css";
-import Clarity from "@/components/clarity/Clarity";
+import { Analytics } from "@vercel/analytics/next";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -25,7 +24,7 @@ export default function RootLayout({
         className={`${nunito.className} antialiased bg-stone-200 text-black dark:bg-stone-900 dark:text-stone-100`}
       >
         {children}
-        <Clarity />
+        <Analytics />
       </body>
     </html>
   );
