@@ -52,7 +52,7 @@ model Deck {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
   flashcards    Flashcard[]
-  studySessions StudySession[] // ✅ Add this line
+  studySessions StudySession[]
 }
 
 enum FlashcardType {
@@ -178,5 +178,6 @@ model Tag {
   id    String @id @default(uuid())
   name  String @unique
   slug  String @unique
+  
   posts Post[]
 }
