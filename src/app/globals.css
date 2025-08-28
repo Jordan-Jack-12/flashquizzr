@@ -9,13 +9,99 @@
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-rgb: 255, 255, 255;
+
+  /* Stone */
+    --stone-50: oklch(98.5% 0.001 106.423);
+    --stone-100: oklch(97% 0.001 106.424);
+    --stone-200: #e7e5e4;
+    --stone-300: #d6d3d1;
+    --stone-400: #a8a29e;
+    --stone-500: #78716c;
+    --stone-600: #57534e;
+    --stone-700: #44403c;
+    --stone-800: #292524;
+    --stone-900: oklch(21.6% 0.006 56.043);
+    --stone-950: oklch(14.7% 0.004 49.25);
+
+    /* Orange */
+    --orange-50: #fff7ed;
+    --orange-100: #ffedd5;
+    --orange-200: #fed7aa;
+    --orange-300: #fdba74;
+    --orange-400: #fb923c;
+    --orange-500: #f97316;
+    --orange-600: #ea580c;
+    --orange-700: #c2410c;
+    --orange-800: #9a3412;
+    --orange-900: #7c2d12;
+    --orange-950: #431407;
+
+    /* Theme aliases */
+    --bg: var(--stone-50);
+    --bg-muted: var(--stone-100);
+    --bg-elevated: #fff;
+    --text: var(--stone-900);
+    --text-muted: var(--stone-600);
+    --border: var(--stone-200);
+    --accent: var(--orange-600);
+    --accent-contrast: #fff;
+    --accent-muted: var(--orange-100);
+    --selection: var(--orange-200);
+    --code-bg: var(--stone-100);
+    --kbd-bg: var(--stone-200);
+    --mark-bg: var(--orange-100);
+    --link: var(--orange-700);
+    --link-hover: var(--orange-800);
+    --ring: var(--orange-500);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-rgb: 0, 0, 0;
   }
+} */
+
+/* --- Dark mode (prefers + .dark opt-in) --- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: var(--stone-900);
+        --bg-muted: var(--stone-800);
+        --bg-elevated: var(--stone-900);
+        --text: var(--stone-50);
+        --text-muted: var(--stone-400);
+        --border: var(--stone-800);
+        --accent: var(--orange-500);
+        --accent-contrast: #1c1917;
+        --accent-muted: color-mix(in oklab, var(--orange-500) 50%, transparent);
+        --selection: color-mix(in oklab, var(--orange-500) 30%, transparent);
+        --code-bg: var(--stone-900);
+        --kbd-bg: var(--stone-800);
+        --mark-bg: color-mix(in oklab, var(--orange-600) 20%, transparent);
+        --link: var(--orange-400);
+        --link-hover: var(--orange-300);
+        --ring: var(--orange-500);
+    }
+}
+
+.dark :root,
+.dark {
+    --bg: var(--stone-900);
+    --bg-muted: var(--stone-900);
+    --bg-elevated: var(--stone-900);
+    --text: var(--stone-50);
+    --text-muted: var(--stone-400);
+    --border: var(--stone-800);
+    --accent: var(--orange-500);
+    --accent-contrast: #1c1917;
+    --accent-muted: color-mix(in oklab, var(--orange-500) 15%, transparent);
+    --selection: color-mix(in oklab, var(--orange-500) 30%, transparent);
+    --code-bg: var(--stone-900);
+    --kbd-bg: var(--stone-800);
+    --mark-bg: color-mix(in oklab, var(--orange-600) 20%, transparent);
+    --link: var(--orange-400);
+    --link-hover: var(--orange-300);
+    --ring: var(--orange-500);
 }
 
 .button_gradient {
@@ -26,8 +112,407 @@
   background: linear-gradient(135deg, #feb47b, #ff7e5f);
 }
 
+.button_gradient:disabled {
+  background: #cc5b3f;
+}
+
+.scroll-bar {
+
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 body {
   font-family: var(--nunito);
   scroll-behavior: smooth;
   scroll-padding-top: 4.5rem;
+}
+
+.separator {
+  column-rule: 1px solid #ffffff;
+}
+
+/* --- Base scope --- */
+.content {
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.65;
+    font-feature-settings: "kern", "liga", "clig", "calt";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+/* Reset inside scope so Next.js defaults don’t fight us */
+.content * {
+    box-sizing: border-box;
+}
+
+/* Better selection */
+.content ::selection {
+    background: var(--selection);
+}
+
+/* Layout helpers */
+.content {
+
+    --rhythm: 1rem;
+    padding: 1rem;
+}
+
+.content> :where(article, section, main) {
+    margin-inline: auto;
+}
+
+/* Headings */
+.content :where(h1, h2, h3, h4, h5, h6) {
+    color: var(--text);
+    line-height: 1.25;
+    margin: 1.2em 0 0.5em;
+    font-weight: 700;
+}
+
+.content h1 {
+    font-size: 1.75rem;
+    letter-spacing: -0.02em;
+}
+
+.content h2 {
+    font-size: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3em;
+}
+
+.content h3 {
+    font-size: 1.25rem;
+}
+
+.content h4 {
+    font-size: 1.125rem;
+}
+
+.content :where(h5, h6) {
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+/* Text & inline */
+.content p {
+    margin: 0.9em 0;
+}
+
+.content small {
+    font-size: 0.875em;
+    color: var(--text-muted);
+}
+
+.content strong {
+    font-weight: 700;
+}
+
+.content em {
+    font-style: italic;
+}
+
+.content mark {
+    background: var(--mark-bg);
+    padding: 0 .2em;
+    border-radius: .2em;
+}
+
+.content :where(sup, sub) {
+    font-size: 0.75em;
+    line-height: 0;
+}
+
+.content abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+/* Links */
+.content a {
+    color: var(--link);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+    transition: color .2s ease, background-color .2s ease;
+}
+
+.content a:hover {
+    color: var(--link-hover);
+}
+
+.content a:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: .25rem;
+}
+
+/* Lists */
+.content :where(ul, ol) {
+    padding-left: 1.25rem;
+    margin: 0.75em 0;
+}
+
+.content ul {
+    list-style: disc;
+}
+
+.content ol {
+    list-style: decimal;
+}
+
+.content li {
+    margin: 0.35em 0;
+}
+
+.content li::marker {
+    color: var(--orange-600);
+}
+
+/* Blockquote */
+.content blockquote {
+    margin: 1em 0;
+    padding: .75rem 1rem;
+    border-left: 4px solid var(--orange-600);
+    background: var(--bg-muted);
+    color: var(--text);
+    border-radius: .5rem;
+}
+
+/* Code & Pre */
+.content code,
+.content kbd,
+.content samp {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.925em;
+}
+
+.content code {
+    background: var(--code-bg);
+    padding: 0.15em 0.4em;
+    border: 1px solid var(--border);
+    border-radius: .375rem;
+}
+
+.content pre {
+    background: var(--code-bg);
+    padding: 1rem;
+    border-radius: .75rem;
+    overflow: auto;
+    border: 1px solid var(--border);
+}
+
+.content pre code {
+    background: transparent;
+    padding: 0;
+    border: 0;
+}
+
+/* Keyboard */
+.content kbd {
+    background: var(--kbd-bg);
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: .375rem;
+    padding: 0 .4em;
+    box-shadow: inset 0 -1px 0 var(--border);
+}
+
+/* HR */
+.content hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+    position: relative;
+}
+
+.content hr::after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 60px;
+    margin-top: -2px;
+    background: linear-gradient(90deg, var(--orange-600), var(--orange-400));
+}
+
+/* Tables */
+.content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: .75rem;
+    overflow: hidden;
+}
+
+.content thead th {
+    text-align: left;
+    background: var(--orange-50);
+    color: var(--stone-900);
+    border-bottom: 1px solid var(--border);
+    padding: .75rem .875rem;
+}
+
+.content tbody td {
+    padding: .75rem .875rem;
+    border-top: 1px solid var(--border);
+}
+
+.content tbody tr:nth-child(even) {
+    background: var(--bg-muted);
+}
+
+/* Media */
+.content :where(img, video, canvas, svg) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: .75rem;
+}
+
+.content figure {
+    margin: 1.25rem 0;
+}
+
+.content figcaption {
+    color: var(--text-muted);
+    font-size: .925rem;
+    margin-top: .5rem;
+    text-align: center;
+}
+
+/* Details / Summary */
+.content details {
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    padding: .75rem 1rem;
+    background: var(--bg-elevated);
+    margin: 1rem 0;
+}
+
+.content summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.content details[open] {
+    border-color: var(--orange-400);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--orange-400) 25%, transparent);
+}
+
+/* Nav / Header / Footer / Aside / Article / Section */
+.content :where(header, nav, footer, aside, article, section) {
+    border-color: var(--border);
+}
+
+.content header,
+.content footer {
+    padding: 1rem 0;
+}
+
+.content nav a {
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+/* Buttons, inputs (basic alignment with theme) */
+.content button,
+.content input[type="submit"],
+.content input[type="button"] {
+    background: var(--accent);
+    color: var(--accent-contrast);
+    border: none;
+    padding: .6rem .9rem;
+    border-radius: .6rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform .06s ease, filter .15s ease;
+}
+
+.content button:hover,
+.content input[type="submit"]:hover,
+.content input[type="button"]:hover {
+    filter: brightness(1.05);
+}
+
+.content button:active,
+.content input[type="submit"]:active,
+.content input[type="button"]:active {
+    transform: translateY(1px);
+}
+
+.content :where(input, textarea, select) {
+    width: 100%;
+    background: var(--bg-elevated);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    padding: .6rem .75rem;
+    outline: none;
+}
+
+.content :where(input, textarea, select):focus {
+    border-color: var(--ring);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 25%, transparent);
+}
+
+/* Alerts / callouts (utility classes) */
+.content .callout {
+    display: block;
+    padding: .875rem 1rem;
+    border-left: 4px solid var(--orange-600);
+    background: var(--accent-muted);
+    border-radius: .5rem;
+    margin: 1rem 0;
+}
+
+/* Accessibility: skip link (if used) */
+.content .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.content .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    width: auto;
+    height: auto;
+    background: var(--accent);
+    color: var(--accent-contrast);
+    padding: .5rem .75rem;
+    border-radius: .5rem;
+}
+
+/* Cards (optional helper) */
+.content .card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 1px 0 color-mix(in oklab, var(--stone-900) 6%, transparent);
 }

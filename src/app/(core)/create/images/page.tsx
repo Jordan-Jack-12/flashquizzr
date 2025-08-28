@@ -1,8 +1,11 @@
+"use client"
+
 import React from 'react'
+import ImageForm from './ImageForm'
 
 const ImagesPage = () => {
     return (
-        <div>Images</div>
+        <ImageForm />
     )
 }
 

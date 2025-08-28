@@ -1,3 +1,6 @@
+import DeckPane from "@/components/deckPage/deckPane";
+import { prisma } from "@/lib/prisma";
+import { redirect } from "next/navigation";
 
 type PageParams = {
     params: Promise<{
@@ -5,13 +8,33 @@ type PageParams = {
     }>
 }
 
-const DeckPage = async (props : PageParams) => {
+export const dynamic = "force-dynamic";
 
+const DeckPage = async (props: PageParams) => {
 
+    const deck = await prisma.deck.findUnique({
+        where: { id: (await props.params).deck_id },
+        include: {
+            flashcards: {
+                select: {
+                    id: true,
+                    type: true,
+                    front: true,
+                    frontImages: true,
+                    back: true,
+                    backImages: true,
+                }
+            }
+        }
+    })
+
+    if (!deck) redirect('/dashboard')
+
+    const flashcards = deck.flashcards
     return (
-        <div className='max-h-screen flex flex-col gap-4 justify-items-start'>
-            <div className='text-xl'>Deck Name: {(await props.params).deck_id}</div>
-        </div>
+        <main>
+            <DeckPane id={deck.id} name={deck.name} desc={deck.description} flashcards={flashcards} />
+        </main>
     )
 }
 

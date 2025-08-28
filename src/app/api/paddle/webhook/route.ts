@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
         const eventName = eventData?.eventType ?? 'Unknown event';
 
         if (eventData) {
-            console.log(eventData);
+          console.log("got event");
         }
 
         return Response.json({ status: 200, eventName });

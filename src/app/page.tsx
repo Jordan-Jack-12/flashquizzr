@@ -12,12 +12,12 @@ export default function Home() {
           <div className="place-self-center">
             <h1 className="text-3xl mt-5  md:text-4xl font-bold tracking-tighter sm:leading-[3.75rem] px-2.5 sm:px-0 sm:text-center">When You Actually Need to Remember Stuff</h1>
             <p className="text-base mt-8 text-stone-600 dark:text-stone-400 px-2.5 place-self-start sm:text-xl sm:place-self-center">Flashcards and quizzes that go beyond “just okay.”</p>
-            <div className="mt-12 mx-2.5 md:mx-auto grid grid-cols-1 md:flex gap-3 items-stretch md:items-center sm:place-self-center">
+            <div className="mt-12 mx-2.5 md:mx-auto grid grid-cols-1 md:flex gap-3 items-stretch md:items-center sm:place-self-center ">
               <Link href={`/`}>
-                <button className={`w-full py-2 px-6 rounded-md button_gradient text-orange-950 font-bold hover:drop-shadow-lg`}>Start Study</button>
+                <button className={`w-full py-2 px-6 cursor-pointer rounded-md button_gradient text-orange-950 font-bold hover:drop-shadow-lg`}>Start Study</button>
               </Link>
               <Link href={"/#demo"}>
-                <button className="w-full py-2 px-6 bg-orange-900/30 text-orange-400 font-semibold rounded-md dark:border-orange-300 dark:text-orange-400 hover:drop-shadow-lg">Watch Demo</button>
+                <button className="w-full py-2 px-6 cursor-pointer bg-orange-900/30 text-orange-400 font-semibold rounded-md dark:border-orange-300 dark:text-orange-400 hover:drop-shadow-lg">Watch Demo</button>
               </Link>
             </div>
           </div>

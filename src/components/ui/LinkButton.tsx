@@ -10,7 +10,7 @@ type LinkButtonType = {
 
 const LinkButton = (props : LinkButtonType) => {
     return (
-        <Link href={props.href} className='px-4 py-2 rounded-lg' style={{"background": `${props.bg}`, "color": `${props.color}`}}>
+        <Link href={props.href} className='px-4 py-2 rounded-lg text-center m-4' style={{"background": `${props.bg}`, "color": `${props.color}`}}>
             {props.content}
         </Link>
     )

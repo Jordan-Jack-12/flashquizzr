@@ -1,0 +1,9 @@
+export const WEBSITE_URL = process.env.WEBSITE_URL!;
+export const AUTH_URL = process.env.NEXT_PUBLIC_SUPABASE_URL + "/auth/v1";
+export const APIKEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+export const COOKIE = process.env.SESSION_COOKIE_NAME || "sid";
+export const BUCKET_URL = process.env.NEXT_PUBLIC_SUPABASE_URL + "/storage/v1/object"
+export const COOKIE_DOMAIN = process.env.SESSION_COOKIE_DOMAIN;
+export const SESSION_EXPIRATION_SECONDS = 60 * 60 * 24 * 30;
+export const RESEND_API_KEY = process.env.RESEND_API_KEY!;
+export const JWT_SECRET = process.env.SUPABSE_JWT_SECRET!;

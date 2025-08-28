@@ -9,50 +9,64 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-model User {
-  id                 String           @id @default(cuid())
-  email              String           @unique
-  passwordHash       String
-  salt               String
-  firstName          String
-  LastName           String
-  createdAt          DateTime         @default(now())
-  lastLogin          DateTime?
-  verified           Boolean          @default(false)
-  verifyToken        String?
-  verifyTokenExpires DateTime?
-  subscription       Subscription[]
-  decks              Deck[]
-  studySessions      StudySession[]
-  flashcardStats     FlashcardStats[]
+model Profile {
+  id                     String    @id
+  email                  String    @unique
+  firstName              String    @map("first_name")
+  lastName               String    @map("last_name")
+  profileImage           String?   @map("profile_image")
+  streak                 Int       @default(1)
+  emailVerifiedAt        DateTime? @map("email_verified_at")
+  emailVerificationToken String?   @map("email_verification_token")
+  createdAt              DateTime  @default(now()) @map("created_at")
+  updatedAt              DateTime  @updatedAt @map("updated_at")
+
+  decks               Deck[]
+  flashcard           Flashcard[]
+  daily_study_session DailyStudySession[]
+  quiz_session        QuizSession[]
+
+  paddleCustomerId String?        @map("paddle_customer_id")
+  subscription     Subscription[]
+
+  @@map("profile")
 }
 
 model Subscription {
   id                   String    @id @default(cuid())
-  user                 User      @relation(fields: [userId], references: [id])
-  userId               String
-  paddleSubscriptionId String
-  plan                 String // e.g., 'free', 'pro', etc.
-  startDate            DateTime
-  endDate              DateTime?
-  status               String // active, cancelled, expired
+  profile              Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId            String    @map("profile_id")
+  paddleSubscriptionId String    @map("paddle_subscription_id")
+  paddleCustomerId     String    @map("paddle_customer_id")
+  plan                 String
+  startDate            DateTime  @map("start_date")
+  endDate              DateTime? @map("end_date")
+  status               String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("subscription")
 }
 
 model Deck {
-  id            String         @id @default(cuid())
-  user          User           @relation(fields: [userId], references: [id])
-  userId        String
-  title         String
-  description   String?
-  isPublic      Boolean        @default(false)
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
-  flashcards    Flashcard[]
-  studySessions StudySession[]
+  id           String        @id @default(cuid())
+  profile      Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId    String        @map("profile_id")
+  name         String
+  description  String?
+  isPublic     Boolean       @default(false) @map("is_public")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+  flashcards   Flashcard[]
+  quiz_session QuizSession[]
+
+  @@map("deck")
 }
 
 enum FlashcardType {
@@ -64,120 +78,81 @@ enum FlashcardType {
 }
 
 model Flashcard {
-  id        String        @id @default(cuid())
-  deck      Deck          @relation(fields: [deckId], references: [id])
-  deckId    String
-  type      FlashcardType
-  dueDate   DateTime?
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-
-  basic          FlashcardBasic?
-  mcq            FlashcardMCQ?
-  cloze          FlashcardCloze?
-  list           FlashcardList?
-  imageOcclusion FlashcardImageOcclusion?
-
-  logs  StudyCardLog[]
-  stats FlashcardStats[]
-}
-
-model FlashcardBasic {
-  flashcardId String @id
+  id          String        @id @default(cuid())
+  profile     Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId   String        @map("profile_id")
+  deck        Deck          @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  deckId      String        @map("deck_id")
+  type        FlashcardType
   front       String
   back        String
+  frontImages String[]      @map("front_images")
+  backImages  String[]      @map("back_images")
+  options     String[]
 
-  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  new          Boolean   @default(true)
+  learned      Boolean   @default(false)
+  easeFactor   Float     @default(2.5)
+  interval     Int       @default(1)
+  repetitions  Int       @default(0)
+  dueDate      DateTime  @map("due_date")
+  lastReviewed DateTime? @map("last_reviewed")
+  lapses       Int       @default(0)
+
+  @@map("flashcard")
 }
 
-model FlashcardMCQ {
-  flashcardId   String @id
-  question      String
-  correctOption String
-  options       Json
+model DailyStudySession {
+  id            String  @id @default(cuid())
+  profile       Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId     String  @map("profile_id")
+  cardsReviewed Int     @default(0) @map("cards_reviewed")
+  accuracy      Int     @default(0)
 
-  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
+  @@map("daily_study_session")
 }
 
-model FlashcardCloze {
-  flashcardId String @id
-  text        String // e.g., "The capital of France is [[Paris]]"
+model QuizSession {
+  id        String   @id @default(cuid())
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId String   @map("profile_id")
+  deck      Deck     @relation(fields: [deckId], references: [id], onDelete: Cascade)
+  deckId    String   @map("deck_id")
+  total     Int
+  score     Int
+  createdAt DateTime @default(now()) @map("created_at")
 
-  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
-}
-
-model FlashcardList {
-  flashcardId String @id
-  prompt      String
-  items       Json // Example: ["First", "Second", "Third"]
-
-  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
-}
-
-model FlashcardImageOcclusion {
-  flashcardId String @id
-  imageUrl    String
-  masks       Json // Example: [{ x, y, width, height, label }]
-
-  flashcard Flashcard @relation(fields: [flashcardId], references: [id])
-}
-
-model StudySession {
-  id        String         @id @default(cuid())
-  user      User           @relation(fields: [userId], references: [id])
-  userId    String
-  deck      Deck           @relation(fields: [deckId], references: [id])
-  deckId    String
-  mode      String // 'study' or 'quiz'
-  startedAt DateTime       @default(now())
-  endedAt   DateTime?
-  score     Float?
-  logs      StudyCardLog[]
-}
-
-model StudyCardLog {
-  id             String       @id @default(cuid())
-  studySession   StudySession @relation(fields: [studySessionId], references: [id])
-  studySessionId String
-  flashcard      Flashcard    @relation(fields: [flashcardId], references: [id])
-  flashcardId    String
-  responseType   String // correct, incorrect, skipped
-  userAnswer     String?
-  timestamp      DateTime     @default(now())
-}
-
-model FlashcardStats {
-  id           String    @id @default(cuid())
-  user         User      @relation(fields: [userId], references: [id])
-  userId       String
-  flashcard    Flashcard @relation(fields: [flashcardId], references: [id])
-  flashcardId  String
-  timesSeen    Int       @default(0)
-  timesCorrect Int       @default(0)
-  lastSeenAt   DateTime?
+  @@map("quiz_session")
 }
 
 model Post {
   id          String   @id @default(uuid())
   title       String
-  slug        String   @unique // for clean URLs
-  content     String // Markdown or HTML
+  slug        String   @unique
+  content     String
   description String?
-  coverImage  String?
-  readTime    Int?
+  coverImage  String?  @map("cover_image")
+  readTime    Int?     @map("read_time")
   published   Boolean  @default(false)
   featured    Boolean  @default(false)
-  authorId    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  authorId    String   @map("author_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   tags Tag[]
+
+  @@map("post")
 }
 
 model Tag {
-  id    String @id @default(uuid())
-  name  String @unique
-  slug  String @unique
-  
+  id   String @id @default(uuid())
+  name String @unique
+  slug String @unique
+
   posts Post[]
+
+  @@map("tag")
 }

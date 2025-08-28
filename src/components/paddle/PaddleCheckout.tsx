@@ -1,55 +1,82 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { initializePaddle, Paddle } from '@paddle/paddle-js';
+import { CheckoutEventsData, initializePaddle, Paddle } from '@paddle/paddle-js';
 
-const PaddleCheckout = () => {
+type PropsType = {
+    email: string,
+}
+
+const PaddleCheckout = ({ email }: PropsType) => {
     const [paddle, setPaddle] = useState<Paddle>();
-    
+    const [checkoutData, setCheckoutData] = useState<CheckoutEventsData | null>(null);
+
+    const handleCheckoutEvents = (event: CheckoutEventsData) => {
+        setCheckoutData(event);
+    };
+
     useEffect(() => {
         initializePaddle({
             environment: "sandbox",
             token: process.env.NEXT_PUBLIC_PADDLE_CLIENT_TOKEN!,
             debug: true,
-            
-        }).then((instance) => {
-            if (instance) {
-                setPaddle(instance);
+            eventCallback: (event) => {
+                if (event.data && event.name) {
+                    handleCheckoutEvents(event.data);
+                    console.log(event.data)
+                }
+            },
+            checkout: {
+                settings: {
+                    variant: 'one-page',
+                    displayMode: 'inline',
+                    theme: 'dark',
+                    allowLogout: !email,
+                    frameTarget: 'checkout-container',
+                    frameInitialHeight: 450,
+                    frameStyle: 'width: 100%; background-color: transparent; border: none',
+                    successUrl: '/checkout/success',
+                },
+            },
+
+
+        }).then(async (paddle) => {
+            if (paddle) {
+                setPaddle(paddle);
+                paddle.Checkout.open({
+                    customer: {
+                        email: email,
+                    },
+                    items: [{
+                        priceId: 'pri_01j91mr0m6t08a0kgbz4zkytat',
+                        quantity: 1
+                    }],
+                })
             } else {
                 console.warn("instance is not initialize");
             }
         })
-    }, []);
-
-    const openCheckout = () => {
-        paddle?.Checkout.open({
-            settings: {
-                theme: "dark"
-            },
-            items: [{
-                priceId: 'pri_01j91mmpybpyj8wx73c76rkr7d',
-                quantity: 1
-            }],
-        })
-    };
+    }, [paddle?.Initialized, email]);
 
     return (
-        <div className="max-w-md mx-auto mt-12 p-6 bg-stone-800 shadow rounded">
-            <h1 className="text-2xl font-bold mb-4">Buy FlashQuizzr Premium</h1>
-            <p className="mb-6 text-stone-100">
-                Unlock all features, unlimited cards, and advanced memory tracking.
-            </p>
-            <ul className="mb-6 text-sm text-stone-100 list-disc pl-4">
-                <li>Unlimited flashcards</li>
-                <li>Custom spaced repetition algorithm</li>
-                <li>Export to Anki, Quizlet, and more</li>
-            </ul>
-            <button
-                onClick={openCheckout}
-                className="w-full py-3 text-orange-950 font-semibold button_gradient rounded"
-            >
-                Subscribe – $4.99/month
-            </button>
+        <div className="flex justify-center w-full mx-auto mt-12 p-6 bg-stone-800 shadow rounded">
+            <div className='flex flex-col'>
+                <p className='text-sm font-bold text-stone'>Order Summary</p>
+                <div>
+                    <p className='text-3xl font-bold'>{checkoutData?.totals ? `${new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                    }).format(checkoutData.totals.total)}` : "Loading..."}</p>
+                </div>
+                <div>
+                    <p className='text-sm'> After free trial</p>
+                    {checkoutData?.recurring_totals?.total && new Intl.NumberFormat('en-US', {
+                        style: 'currency',
+                        currency: 'USD',
+                    }).format(checkoutData?.recurring_totals?.total)}
+                </div>
+            </div>
+            <div className='checkout-container'></div>
         </div>
     );
 };

@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
 
 module.exports = {
   images: {
-    remotePatterns: [],
+    remotePatterns: [
+    ],
   },
 }
 

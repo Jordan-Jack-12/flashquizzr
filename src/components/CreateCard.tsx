@@ -10,19 +10,24 @@ type CreateCardType = {
 
 const CreateCard = (props: CreateCardType) => {
     return (
-        <div className='flex flex-col justify-between w-120 h-[30vh] rounded-lg bg-orange-100 dark:bg-stone-800'>
-            <div className='mt-6 mx-4'>
-                <h2 className='text-4xl'>{props.title}</h2>
+        <div className='flex flex-col justify-between h-[30vh] rounded-lg bg-orange-100 dark:bg-stone-800'>
+            <div className='flex align-start items-center'>
+                <div className='text-center mx-auto w-full'>
+                    {props.icon}
+                </div>
+                <div className='mt-6 mx-4'>
+<h2 className='text-lg'>{props.title}</h2>
                 <p className='text-stone-400'>{props.description}</p>
+                </div>
+                
             </div>
-            <div className='mb-6 mx-4 flex justify-end'>
-                <LinkButton
-                    href={props.goto}
-                    content="Create"
-                    bg="linear-gradient(135deg, #ff7e5f, #feb47b)"
-                    color='#000000'
-                />
-            </div>
+            <LinkButton
+                href={props.goto}
+                content="Create"
+                bg="linear-gradient(135deg, #ff7e5f, #feb47b)"
+                color='#000000'
+            />
+
 
         </div>
     )

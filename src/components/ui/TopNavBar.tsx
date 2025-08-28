@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { cookies } from 'next/headers'
-import { getSessionUserID } from '@/actions/auth/session/getUserBySessionId';
+import { getSessionUserID } from '@/data/user/get-session-user-id';
 
 async function TopNavBar() {
-    const sessionId = ((await cookies()).get("session_id")?.value || "")
-    const user = await getSessionUserID(sessionId);
+
+    const userID = await getSessionUserID();
 
     return (
         <header className="w-screen container mx-auto">
@@ -19,11 +18,11 @@ async function TopNavBar() {
 
                         <li><Link href={"/#feature"}>Feature</Link></li>
                         <li><Link href={"/#pricing"}>Pricing</Link></li>
-                        {!user && <>
+                        {!userID && <>
                             <li><Link href={"/login"}>Login</Link></li>
-                            <li><Link href={"/signup"}><button className={`py-2 px-6 text-orange-950 rounded-md button_gradient`}>Signup</button></Link></li>
+                            <li><Link href={"/signup"}><button className={`py-2 px-6 text-orange-950 rounded-md button_gradient cursor-pointer`}>Signup</button></Link></li>
                         </>}
-                        {user && <li><Link href={"/dashboard"}><button className={`py-2 px-6 text-orange-950 rounded-md button_gradient`}>Dashboard</button></Link></li>}
+                        {userID && <li><Link href={"/dashboard"}><button className={`py-2 px-6 text-orange-950 rounded-md button_gradient cursor-pointer`}>Dashboard</button></Link></li>}
 
                     </ul>
                 </nav>

@@ -99,13 +99,13 @@ const BlogPage = async () => {
         take: 10
     })
 
-    const tags = await prisma.tag.findMany({
-        select: {
-            id: true,
-            slug: true,
-            name: true,
-        }
-    })
+    // const tags = await prisma.tag.findMany({
+    //     select: {
+    //         id: true,
+    //         slug: true,
+    //         name: true,
+    //     }
+    // })
 
     if (!postListFeatured || !recentSixPost || !recentTenPost) {
         return (
@@ -126,7 +126,7 @@ const BlogPage = async () => {
                     return (
                         <Link href={`/blog/${item.slug}`} key={item.id} className={`w-full min-h-56 flex flex-col justify-end items-start p-4 button_gradient rounded-md ${index === 0 ? 'sm:row-span-2' : ''
                             }`}>
-                            <p className='px-2 py-1 bg-orange-500 rounded-lg'>{item.tags[0].name}</p>
+                            {/* <p className='px-2 py-1 bg-orange-500 rounded-lg'>{item.tags[0].name}</p> */}
                             <h2 className='text-2xl font-bold'>{item.title}</h2>
                             <p className='flex gap-1 items-center'><Calendar size={16} /> {formatDateToDDMMYYYY(item.createdAt)}</p>
                         </Link>
@@ -164,7 +164,7 @@ const BlogPage = async () => {
 
                                     </div>
                                     <div>
-                                        <span className='px-2 py-1 bg-orange-500/15 rounded-lg'>{item.tags[0].name}</span>
+                                        {/* <span className='px-2 py-1 bg-orange-500/15 rounded-lg'>{item.tags[0].name}</span> */}
                                         <h2 className='text-2xl'>{item.title}</h2>
                                         <div><p className='flex gap-1 items-center'><Calendar size={16} /> {formatDateToDDMMYYYY(item.createdAt)}</p></div>
                                         <p className='line-clamp-2'>{item.description}</p>
@@ -178,7 +178,7 @@ const BlogPage = async () => {
                 <div>
                     <div className='bg-orange-700/20 py-2.5 m-2.5'><p className='text-center'>Tags</p></div>
                     <div className='flex flex-wrap gap-3 mx-2.5'>
-                        {!tags && <p>No Tags Found</p>}
+                        {/* {!tags && <p>No Tags Found</p>}
                         {tags.length > 0 && tags.map((item: {
                             name: string;
                             id: string;
@@ -187,7 +187,7 @@ const BlogPage = async () => {
                             return (
                                 <Link key={item.id} href={`/blog/tag/${item.slug}`} className='px-2 py-1 bg-orange-500/15 rounded-lg'>{item.name}</Link>
                             )
-                        })}
+                        })} */}
                     </div>
                 </div>
             </div>
