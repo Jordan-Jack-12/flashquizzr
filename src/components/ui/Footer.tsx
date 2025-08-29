@@ -51,7 +51,7 @@ function Footer() {
                     <div className="flex flex-col">
                         <span className="text-lg font-semibold">Legal</span>
                         <Link href={"/privacy-policy"}><span className="text-sm text-stone-600 dark:text-stone-500">Privacy Policy</span></Link>
-                        <Link href={"/terms-of-service"}><span className="text-sm text-stone-600 dark:text-stone-500">Terms of Service</span></Link>
+                        <Link href={"/terms"}><span className="text-sm text-stone-600 dark:text-stone-500">Terms of Service</span></Link>
                         <Link href={"/cookie-policy"}><span className="text-sm text-stone-600 dark:text-stone-500">Cookies</span></Link>
                         <Link href={"/refund-policy"}><span className="text-sm text-stone-600 dark:text-stone-500">Refund Policy</span></Link>
                         <Link href={"/disclaimer"}><span className="text-sm text-stone-600 dark:text-stone-500">Disclaimer</span></Link>
@@ -61,7 +61,7 @@ function Footer() {
             <hr className="container mx-auto my-4 px-5 border border-stone-100 dark:border-stone-800" />
             <div className="container lg:container-[100px] flex flex-wrap items-center justify-between mx-auto mb-8 px-5">
                 <span className="text-sm">&#169; 2024 FlashQuizzr</span>
-                <span className="text-sm">All right reserved. <Link href={"/privacy-policy"} className="text-sm text-orange-500 font-semibold">Privacy Policy</Link><span className="font-semibold text-orange-500"> &#9679; </span><Link href={"/terms-of-service"} className="text-sm text-orange-500 font-semibold">Terms of Service</Link></span>
+                <span className="text-sm">All right reserved. <Link href={"/privacy-policy"} className="text-sm text-orange-500 font-semibold">Privacy Policy</Link><span className="font-semibold text-orange-500"> &#9679; </span><Link href={"/terms"} className="text-sm text-orange-500 font-semibold">Terms of Service</Link></span>
             </div>
         </footer>
     )

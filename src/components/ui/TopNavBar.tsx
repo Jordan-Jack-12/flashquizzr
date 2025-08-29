@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { getSessionUserID } from '@/data/user/get-session-user-id';
+import { getSessionUserIDNavBar } from '@/data/user/get-session-user-id';
 
 async function TopNavBar() {
 
-    const userID = await getSessionUserID();
+    const userID = await getSessionUserIDNavBar();
 
     return (
         <header className="w-screen container mx-auto">
@@ -18,6 +18,7 @@ async function TopNavBar() {
 
                         <li><Link href={"/#feature"}>Feature</Link></li>
                         <li><Link href={"/#pricing"}>Pricing</Link></li>
+                        <li><Link href={"/blog"}>Blog</Link></li>
                         {!userID && <>
                             <li><Link href={"/login"}>Login</Link></li>
                             <li><Link href={"/signup"}><button className={`py-2 px-6 text-orange-950 rounded-md button_gradient cursor-pointer`}>Signup</button></Link></li>

@@ -16,3 +16,17 @@ export async function getSessionUserID() {
 
     return session.userId;
 }
+
+export async function getSessionUserIDNavBar() {
+    const cookieStore = await cookies();
+    const sessionId = cookieStore.get(COOKIE)?.value;
+
+    if (!sessionId || sessionId.length < 1) return null;
+
+    const session = await redisClient.get<Session>(`session:${sessionId}`);
+
+    if (!session) return null;
+
+    return session.userId;
+}
+
