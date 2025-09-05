@@ -42,6 +42,8 @@ export async function generateMetadata({
     }
 }
 
+export const revalidate = 86400;
+
 const PostPage = async ({
     params,
 }: {

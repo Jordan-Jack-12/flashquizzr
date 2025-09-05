@@ -38,6 +38,7 @@ type postWithoutTagType = {
     featured: boolean;
 }
 
+export const revalidate = 86400;
 
 const BlogPage = async () => {
 
