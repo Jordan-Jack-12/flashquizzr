@@ -12,7 +12,9 @@ export async function sendVerificationEmail({ email, firstName, token }: { email
             from: 'Flashquizzr <mail@mail.flashquizzr.com>',
             to: email,
             subject: 'Verify Your Email',
-            html: `Welcome ${firstName}, Click here to verify <a href='http://localhost:3000/api/email-verify?token=${token}'> Verify me</a>`,
+            html: `Welcome ${firstName}, Click here to verify <a href='https://flashquizzr.com/api/email-verify?token=${token}'> Verify me</a>
+            
+            <a href='http://localhost:3000/api/email-verify?token=${token}'>For developer purpose</a>`,
 
         });
 
