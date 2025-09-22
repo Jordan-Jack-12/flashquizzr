@@ -10,7 +10,7 @@ const SideBar = async () => {
     const user = await getSessionUser();
     if (!user) return;
     return (
-        <div className='flex flex-col gap-1 h-screen sticky top-0 left-0 bottom-0 px-2 md:w-[15%] justify-between bg-stone-800/20'>
+        <div className='hidden lg:flex lg:flex-col gap-1 h-screen sticky top-0 left-0 bottom-0 px-2 md:w-[15%]  justify-between bg-stone-800/20'>
             <div className='h-full top-0 left-0 z-50'>
                 <div className='p-4'>
                     <Link href={'/'} className="flex ">

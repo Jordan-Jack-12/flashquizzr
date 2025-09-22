@@ -1,10 +1,7 @@
-import { RESEND_API_KEY } from "@/lib/constants";
 import { prisma } from "@/lib/prisma";
 import { generateVerifyToken, tokenExpired } from "@/utils/auth/stringGenerator";
+import { resend } from "@/utils/resend/resend-instance";
 import { redirect } from "next/navigation";
-import { Resend } from "resend";
-
-const resend = new Resend(RESEND_API_KEY);
 
 export async function sendVerificationEmail({ email, firstName, token }: { email: string, firstName: string, token: string }) {
     try {

@@ -31,15 +31,13 @@ const BillingPage = async () => {
                     <div className='flex-auto'>
                         <h1 className='font-bold text-base text-stone-400 dark:text-stone-500'>Current Subscription:</h1>
                         <p className='text-2xl font-bold'>{subscription ? capitalizeWord(subscription.plan): "Free"}</p>
-                        <div className='flex justify-start gap-2 [&>*:nth-child(even)]:mr-8 mt-6'>
+                        <div className='flex items-center justify-start gap-2 [&>*:nth-child(even)]:mr-8 mt-6'>
                             <p className='font-semibold text-base text-stone-400 dark:text-stone-500'>Started at:</p>
                             <p>{subscription && formatDateToDDMMYYYY(subscription.startDate)}</p>
                             <p className='font-semibold text-base text-stone-400 dark:text-stone-500'>Ends at:</p>
                             <p>{subscription ? formatDateToDDMMYYYY(subscription.endDate || "") : "Forever"}</p>
-                            <p className='font-semibold text-base text-stone-400 dark:text-stone-500'>Days left:</p>
-                            <p>24 days</p>
-                            <p className='font-semibold text-base text-stone-400 dark:text-stone-500'>Uses left:</p>
-                            <p>24/30</p>
+                            <p className='font-semibold text-base text-stone-400 dark:text-stone-500'>Status: </p>
+                            <p className={`px-2 py-1 rounded-xl ${subscription?.status === 'active' ? 'bg-green-400/30 text-green-400' : 'bg-orange-400/30 text-orange-400'}`}>{subscription?.status ?? 'active'}</p>
                         </div>
                     </div>
                     <div className='flex items-center gap-4 text-sm font-semibold'>

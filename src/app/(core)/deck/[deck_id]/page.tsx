@@ -8,7 +8,7 @@ type PageParams = {
     }>
 }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
 const DeckPage = async (props: PageParams) => {
 

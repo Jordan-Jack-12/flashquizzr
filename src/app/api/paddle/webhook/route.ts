@@ -1,4 +1,7 @@
+import { createOrUpdateCustomer } from "@/utils/paddle/customer";
 import { getPaddleInstance } from "@/utils/paddle/paddleInstance";
+import { createOrUpdateSubscription } from "@/utils/paddle/subscription";
+import { EventName } from "@paddle/paddle-node-sdk";
 import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -16,7 +19,16 @@ export async function POST(request: NextRequest) {
         const eventName = eventData?.eventType ?? 'Unknown event';
 
         if (eventData) {
-          console.log("got event");
+            switch (eventData.eventType) {
+                case EventName.SubscriptionCreated:
+                case EventName.SubscriptionUpdated:
+                    await createOrUpdateSubscription(eventData);
+                    break;
+                case EventName.CustomerCreated:
+                case EventName.CustomerUpdated:
+                    await createOrUpdateCustomer(eventData);
+                    break;
+            }
         }
 
         return Response.json({ status: 200, eventName });

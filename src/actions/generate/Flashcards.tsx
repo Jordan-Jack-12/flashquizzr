@@ -5,6 +5,8 @@ const GEMINI_API_KEY = process.env.GEMINI_AI_API_KEY;
 import { z } from "zod";
 import { extract } from '@extractus/article-extractor';
 import { htmlToText } from "html-to-text";
+import { getSessionUserID } from '@/data/user/get-session-user-id';
+import { canGenerateFlashcardsWithImage, canGenerateFlashcardsWithPdf, canGenerateFlashcardsWithText, canGenerateFlashcardsWithUrl } from '@/permissions/flashcard-generation';
 
 const genAI = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
@@ -36,6 +38,12 @@ type ReturnType = {
 }
 
 export async function generateFlashcard({ prompt, aiModel, noOfCards, type }: { prompt: string, aiModel: string, noOfCards: number, type: string }): Promise<ReturnType> {
+    const profileId = await getSessionUserID();
+
+    const canGenerateFlashcard = await canGenerateFlashcardsWithText(profileId);
+
+    if (!canGenerateFlashcard) return {success: false, message: "You have exceeded the plan limit."};
+
     const { data, error } = generateSchema.safeParse({
         prompt,
         aiModel,
@@ -99,6 +107,12 @@ export async function generateFlashcardFromPdf(formData: FormData): Promise<Retu
 
     if (pdfFile.size > 18000000) return {success: false, message: 'PDF size is larger than 15MB'}
 
+    const profileId = await getSessionUserID();
+
+    const canGenerateFlashcard = await canGenerateFlashcardsWithPdf(profileId);
+
+    if (!canGenerateFlashcard) return {success: false, message: "You have exceeded the plan limit."};
+
     const pdfFileArrayBuffer = await pdfFile.arrayBuffer();
 
     const aiResponse = await genAI.models.generateContent({
@@ -146,6 +160,14 @@ export async function generateFlashcardFromImage(formData: FormData): Promise<Re
     const noOfCards = formData.get('no-of-cards') ?? '10'
 
     if (!image) return { success: false, message: "Image not found." };
+    // TODO: Check the image size
+
+    const profileId = await getSessionUserID();
+
+    const canGenerateFlashcard = await canGenerateFlashcardsWithImage(profileId);
+
+    if (!canGenerateFlashcard) return {success: false, message: "You have exceeded the plan limit."};
+
 
     const imageArrayBuffer = await image.arrayBuffer();
     const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64')
@@ -194,6 +216,12 @@ export async function generateFlashcardFromUrl(formData: FormData): Promise<Retu
     // const aiModel = formData.get('ai-model');
     const noOfCards = formData.get('no-of-cards');
     const link = formData.get('link');
+
+    const profileId = await getSessionUserID();
+
+    const canGenerateFlashcard = await canGenerateFlashcardsWithUrl(profileId);
+
+    if (!canGenerateFlashcard) return {success: false, message: "You have exceeded the plan limit."};
 
     try {
 
