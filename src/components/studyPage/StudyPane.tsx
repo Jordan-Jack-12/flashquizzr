@@ -49,6 +49,8 @@ const StudyPane = ({ deck_id }: PropsType) => {
     const [firstLoad, setFirstLoad] = useState<boolean>(true);
     const [ansVisible, setAnsVisible] = useState(false);
 
+    const [finishStudyLoading, setFinishStudyLoading] = useState<boolean>(false);
+
     const router = useRouter();
 
     const getTenCards = async () => {
@@ -141,6 +143,7 @@ const StudyPane = ({ deck_id }: PropsType) => {
             router.push('/study');
         };
         try {
+            setFinishStudyLoading(true);
             const formData = new FormData();
             formData.append('updated-cards', JSON.stringify(reviewedCards));
             const updated = await updateFlashcardsDueDate(formData);
@@ -149,8 +152,10 @@ const StudyPane = ({ deck_id }: PropsType) => {
                 return;
             }
             setReviewedCards([]);
+            setFinishStudyLoading(false);
             router.push('/study');
         } catch (error) {
+            setFinishStudyLoading(false);
             console.log(error);
         }
     }
@@ -216,7 +221,7 @@ const StudyPane = ({ deck_id }: PropsType) => {
                 </div>
             </div>
             {dueCards.length < 1 ? <div className='flex gap-5 justify-center *:cursor-pointer'>
-                <button onClick={finishStudy} className='py-2 px-4 rounded-lg font-bold text-blue-400 hover:text-blue-300  hover:bg-blue-400/20'>Finish Study</button>
+                <button onClick={finishStudy} className='py-2 px-4 rounded-lg font-bold text-blue-400 hover:text-blue-300  hover:bg-blue-400/20'>{finishStudyLoading ? 'Loading...' : 'Finish Study'}</button>
             </div> :
                 <div className='flex gap-5 justify-center *:cursor-pointer'>
                     <button onClick={() => chooseNextCard(0)} className='py-2 px-4 rounded-lg font-bold text-red-400 hover:text-red-300  hover:bg-red-400/20'>Very Hard</button>
