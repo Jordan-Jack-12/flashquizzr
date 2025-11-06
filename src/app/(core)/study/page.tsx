@@ -44,11 +44,7 @@ const Studypage = async () => {
         include: {
             _count: {
                 select: {
-                    flashcards: {
-                        where: {
-                            dueDate: { lte: new Date() }
-                        }
-                    }
+                    flashcards: true
                 }
             }
         },
@@ -64,7 +60,7 @@ const Studypage = async () => {
                 <div className='grid grid-cols-4 gap-3'>
                     {due_decks.map((deck, index) => {
                         return (
-                            <StudyPageDecksCard key={index} title={deck.name} desc={deck.description} deck_id={deck.id} count={deck._count.flashcards} />
+                            <StudyPageDecksCard key={index} due_deck={true} title={deck.name} desc={deck.description} deck_id={deck.id} count={deck._count.flashcards} />
                         )
                     })}
                 </div>
@@ -74,7 +70,7 @@ const Studypage = async () => {
                 <div className='grid grid-cols-4 gap-3'>
                     {recent_reviewed_decks.length > 0 ? recent_reviewed_decks.map((deck, index) => {
                         return (
-                            <StudyPageDecksCard key={index} title={deck.name} desc={deck.description} deck_id={deck.id} count={deck._count.flashcards} />
+                            <StudyPageDecksCard key={index} due_deck={false} title={deck.name} desc={deck.description} deck_id={deck.id} count={deck._count.flashcards} />
                         )
                     }) : <p>No Decks Found</p>}
                 </div>

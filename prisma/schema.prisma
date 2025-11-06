@@ -106,11 +106,14 @@ model Flashcard {
 }
 
 model DailyStudySession {
-  id            String  @id @default(cuid())
-  profile       Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  profileId     String  @map("profile_id")
-  cardsReviewed Int     @default(0) @map("cards_reviewed")
-  accuracy      Int     @default(0)
+  id            String   @id @default(cuid())
+  profile       Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  profileId     String   @map("profile_id")
+  cardsReviewed Int      @default(0) @map("cards_reviewed")
+  accuracy      Int      @default(0)
+  createdAt     DateTime @default(now()) @map("created_at")
+  dateIndex     Int?     @map("date_index")
+  yearIndex     Int?     @map("year_index")
 
   @@map("daily_study_session")
 }

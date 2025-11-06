@@ -42,6 +42,8 @@ export async function generateFlashcard({ prompt, aiModel, noOfCards, type }: { 
 
     const canGenerateFlashcard = await canGenerateFlashcardsWithText(profileId);
 
+    console.log(canGenerateFlashcard)
+
     if (!canGenerateFlashcard) return {success: false, message: "You have exceeded the plan limit."};
 
     const { data, error } = generateSchema.safeParse({

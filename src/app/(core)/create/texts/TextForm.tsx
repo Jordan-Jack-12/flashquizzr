@@ -15,7 +15,7 @@ const TextForm = () => {
     const [cards, setCards] = useState<Omit<cardType, 'id' | 'deckId'>[]>([]);
     const [name, setName] = useState<string>("New Deck");
     const [description, setDescription] = useState<string>("New Deck created using texts");
-    
+
     const [loading, setLoading] = useState(false);
     const [generated, setGenerated] = useState(false);
 
@@ -42,14 +42,18 @@ const TextForm = () => {
             setLoading(true);
             const response = await generateFlashcard(data)
             if (response.errors || response.success === false) {
-                toast.error(`${response.errors?.aiModel![0]}, ${response.errors?.prompt![0]}, ${response.errors?.type![0]}, ${response.errors?.noOfCards![0]}`)
-                return
+                toast.error(response.message)
+                setGenerated(true);
+                setLoading(false);
+                return;
             }
 
             const resData = response.data;
             if (!resData || !resData.cards) {
                 toast.error("Something went wrong")
-                return
+                setGenerated(true);
+                setLoading(false);
+                return;
             }
 
             setName(resData.name);
@@ -59,7 +63,7 @@ const TextForm = () => {
             setGenerated(true);
             setLoading(false);
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             toast.error("Something went wrong!")
             setLoading(false)

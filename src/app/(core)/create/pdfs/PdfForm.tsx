@@ -40,6 +40,12 @@ const PdfForm = () => {
     function handleFileSelect(event: React.ChangeEvent<HTMLInputElement>): void {
         event.preventDefault();
         const selectedFiles = Array.from(event.target.files || []).filter(file => file.type === "application/pdf");
+        if (selectedFiles[0].size > 1000000) {
+            toast.error("PDF size exceeding the size limit of 1MB");
+            event.target.files = null;
+            return;
+        }
+
         setPdfFile(selectedFiles)
         console.log("Selected files:", selectedFiles);
     }
@@ -53,7 +59,7 @@ const PdfForm = () => {
             console.log("generateing")
             const response = await generateFlashcardFromPdf(formData)
             if (response.errors || response.success === false) {
-                toast.error(`${response.errors?.aiModel![0]}, ${response.errors?.prompt![0]}, ${response.errors?.type![0]}, ${response.errors?.noOfCards![0]}`)
+                toast.error(`${response.message}`)
                 setLoading(false);
                 return;
             }
@@ -168,8 +174,8 @@ const PdfForm = () => {
                 <div className='flex gap-2 justify-end '>
 
                     <select name="ai-model" id="ai-model" className='rounded-lg outline-1 outline-stone-700 bg-orange-100 dark:bg-stone-900'>
-                        <option value="chat-gpt">Chat Gpt 40 mini</option>
                         <option value="gemini">Gemini flash 2.0</option>
+                        <option value="chat-gpt">Chat Gpt 40 mini</option>
                     </select>
                     <select name="no-of-questions" id="no-of-questions" className='rounded-lg outline-1 outline-stone-700 bg-orange-100 dark:bg-stone-900'>
                         <option value="10">10</option>

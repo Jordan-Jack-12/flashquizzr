@@ -9,6 +9,9 @@ const ProfilePge = async () => {
     const session_id = (await cookies()).get("session_id")?.value
     const userId = await getSessionUserID(session_id!)
 
+    console.log(userId)
+    console.log(session_id)
+
     if (!userId || !session_id) {
         redirect("/login");
     }

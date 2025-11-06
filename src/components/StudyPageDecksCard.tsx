@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 type PropsType = {
+    due_deck: boolean,
     title: string,
     desc: string | null,
     deck_id: string,
@@ -11,7 +12,7 @@ const StudyPageDecksCard = (props: PropsType) => {
     return (
         <div className='grid grid-cols-1 gap-3 p-4 bg-stone-800 rounded-lg'>
             <div>
-                <p className='text-sm'>Total Cards: {props.count}</p>
+                <p className='text-sm'>{props.due_deck ? 'Due' : 'Total'} Cards: {props.count}</p>
                 <hr className='text-stone-600'/>
             </div>
             <div>

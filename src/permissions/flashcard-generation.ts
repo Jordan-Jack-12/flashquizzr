@@ -4,9 +4,11 @@ import { getSubscription } from "@/data/subscription/subscription";
 export async function canGenerateFlashcardsWithText(profileId: string) {
     try {
         const subs = await getSubscription(profileId);
+        console.log(subs, "subs level")
         if (!subs || subs.plan === 'super') {
             const deckCount = await getDecksCount(profileId);
-            if (!deckCount) return null;
+            console.log(deckCount, "deck count")
+            if (deckCount == null) return null;
             if (subs?.plan === 'super') return deckCount < 10 ? true : false;
             return deckCount < 3 ? true : false;
         }
