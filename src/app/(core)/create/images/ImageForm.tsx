@@ -175,8 +175,8 @@ function ImageForm() {
 
                 <div className='flex gap-2 justify-end *:focus:outline-2 *:focus:outline-orange-500'>
                     <select name="ai-model" id="ai-model" className='rounded-lg bg-orange-100 dark:bg-stone-900'>
-                        <option value="chat-gpt">Chat Gpt 40 mini</option>
                         <option value="gemini">Gemini flash 2.0</option>
+                        <option value="chat-gpt">Chat Gpt 40 mini</option>
                     </select>
                     <select name="no-of-cards" id="no-of-cards" className='rounded-lg bg-orange-100 dark:bg-stone-900'>
                         <option value="10">10</option>

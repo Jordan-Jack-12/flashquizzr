@@ -17,15 +17,15 @@ type QuestionType = {
     options: string[],
 }
 
-type AnswerType = {
-    id: string,
-    answer: string,
-}
+// type AnswerType = {
+//     id: string,
+//     answer: string,
+// }
 
 function QuizPane({deck_id} : PropsType) {
     const [questions, setQuestions] = useState<QuestionType[]>([]);
-    const [quizSessionId, setQuizSessionId] = useState<string | null>(null)
-    const [answers, setAnswers] = useState<AnswerType[]>([]);
+    // const [quizSessionId, setQuizSessionId] = useState<string | null>(null)
+    // const [answers, setAnswers] = useState<AnswerType[]>([]);
 
     async function getQuestions() {
         try {
@@ -47,6 +47,7 @@ function QuizPane({deck_id} : PropsType) {
 
     useEffect(() => {
         getQuestions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

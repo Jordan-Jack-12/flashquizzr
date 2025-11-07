@@ -141,8 +141,8 @@ const TextForm = () => {
                         value={aiModel}
                         onChange={(e) => setAiModel(e.target.value)}
                     >
-                        <option value="chat-gpt">Chat Gpt 4-o mini</option>
                         <option value="gemini">Gemini flash 2.0</option>
+                        <option value="chat-gpt">Chat Gpt 4-o mini</option>
                     </select>
                     <select
                         name="no-of-cards"
