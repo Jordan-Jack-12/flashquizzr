@@ -26,8 +26,8 @@ export async function saveDeckAndFlashcards({ name, desc, cards }: {name: string
         }
     }
 
-    const deckId = await prisma.$transaction(async (tx) => {
-        const deck = await tx.deck.create({
+    
+        const deck = await prisma.deck.create({
             data: {
                 profileId: profileId,
                 name: name,
@@ -39,7 +39,7 @@ export async function saveDeckAndFlashcards({ name, desc, cards }: {name: string
         })
 
         for (const card of cards) {
-            await tx.flashcard.create({
+            await prisma.flashcard.create({
                 data: {
                     profileId,
                     deckId: deck.id,
@@ -54,9 +54,6 @@ export async function saveDeckAndFlashcards({ name, desc, cards }: {name: string
             })
         }
 
-        return deck.id
-    })
-
-    revalidatePath(`/deck/${deckId}`, 'layout')
-    return {success: true, data: { deckId }}
+    revalidatePath(`/deck/${deck.id}`, 'layout')
+    return {success: true, data: {deckId: deck.id}}
 }
