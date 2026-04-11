@@ -11,7 +11,7 @@ export const config = {
     matcher: ["/((?!_next/static|_next/image|favicon.ico|public).*)"],
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname
 
     if (!PROTECTED_ROUTES.includes(pathname)) {
