@@ -10,7 +10,7 @@ export async function sendVerificationEmail({ email, firstName, token }: { email
             to: email,
             subject: 'Verify Your Email',
             html: `Welcome ${firstName}, Click here to verify <a href='https://flashquizzr.com/api/email-verify?token=${token}'> Verify me</a>
-            
+           <br/>
             <a href='http://localhost:3000/api/email-verify?token=${token}'>For developer purpose</a>`,
 
         });
@@ -85,6 +85,6 @@ export async function resendEmailVerification(formData:FormData) {
                 emailVerificationToken: newToken
             }
         })
-        
+
         sendVerificationEmail({firstName: profile.firstName, email: profile.email, token: newToken})
     }
